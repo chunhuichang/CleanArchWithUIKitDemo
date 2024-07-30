@@ -15,3 +15,7 @@ setup: clean generate_project
 
 open:
 	xed CleanArchWithUIKitDemo.xcodeproj
+
+format:
+	@echo "Formatting Swift code..."
+	swiftformat .
