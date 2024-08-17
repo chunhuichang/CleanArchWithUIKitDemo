@@ -36,25 +36,4 @@ public class URLSessionHTTPClient: HTTPClient {
             return .failure(error)
         }
     }
-
-    private func parseData(_ data: HTTPClientData) async -> HTTPResult {
-        guard let httpResponse = data.response as? HTTPURLResponse else {
-            return .failure(HTTPClientError.invalidResponse)
-        }
-
-        switch httpResponse.statusCode {
-        case 100...199:
-            return .failure(HTTPClientError.informationalStatus(httpResponse.statusCode))
-        case 200...299:
-            return .success((data.data, httpResponse))
-        case 300...399:
-            return .failure(HTTPClientError.redirectStatus(httpResponse.statusCode))
-        case 400...499:
-            return .failure(HTTPClientError.clientError(httpResponse.statusCode))
-        case 500...599:
-            return .failure(HTTPClientError.serverError(httpResponse.statusCode))
-        default:
-            return .failure(HTTPClientError.unexpectedStatusCode(httpResponse.statusCode))
-        }
-    }
 }
