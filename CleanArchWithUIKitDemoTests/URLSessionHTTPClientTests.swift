@@ -34,7 +34,7 @@ struct URLSessionHTTPClientTests {
 
     @Test(arguments: [100, 300, 400, 500, 600])
     func getForRequest_failsOnAllInvalidStatusCodeCases(statusCode: Int) async {
-        await expectErrorAssertNotNil(resultErrorFor((data: anyData(), response: withStatusCodeHTTPURLResponse(statusCode), error: nil), clientGetType: .request))
+        await expectErrorAssertNotNil(resultErrorFor((data: anyData(), response: HTTPURLResponse(statusCode: statusCode), error: nil), clientGetType: .request))
     }
 
     @Test
@@ -98,7 +98,7 @@ struct URLSessionHTTPClientTests {
 
     @Test(arguments: [100, 300, 400, 500, 600])
     func getFromURL_failsOnAllInvalidStatusCodeCases(statusCode: Int) async {
-        await expectErrorAssertNotNil(resultErrorFor((data: anyData(), response: withStatusCodeHTTPURLResponse(statusCode), error: nil)))
+        await expectErrorAssertNotNil(resultErrorFor((data: anyData(), response: HTTPURLResponse(statusCode: statusCode), error: nil)))
     }
 }
 
@@ -149,34 +149,6 @@ private extension URLSessionHTTPClientTests {
 
     func expectErrorAssertNotNil(_ error: Error?) {
         #expect(error != nil)
-    }
-
-    func anyNSError() -> NSError {
-        NSError(domain: "any error", code: 0)
-    }
-
-    func anyURL() -> URL {
-        URL(string: "http://any-url.com")!
-    }
-
-    func anyURLRequest() -> URLRequest {
-        URLRequest(url: anyURL())
-    }
-
-    func anyData() -> Data {
-        Data("any data".utf8)
-    }
-
-    func withStatusCodeHTTPURLResponse(_ statusCode: Int) -> HTTPURLResponse {
-        HTTPURLResponse(url: anyURL(), statusCode: statusCode, httpVersion: nil, headerFields: nil)!
-    }
-
-    func anyHTTPURLResponse() -> HTTPURLResponse {
-        withStatusCodeHTTPURLResponse(200)
-    }
-
-    func nonHTTPURLResponse() -> URLResponse {
-        URLResponse(url: anyURL(), mimeType: nil, expectedContentLength: 0, textEncodingName: nil)
     }
 }
 
