@@ -8,12 +8,20 @@
 
 /* Begin PBXBuildFile section */
 		01477029A3E7640E4BCD971A /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E14C4FE8C651C82B457F6955 /* ViewController.swift */; };
+		0950120BF7C173755DABD5F2 /* SharedTestHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8B79E516E095D0CE1E81BEF /* SharedTestHelpers.swift */; };
 		2CAA50840C408DA140BB2058 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9B814066CE1BB97965546D7D /* Main.storyboard */; };
+		34E61E434CC180526271B775 /* URLSessionHTTPClientTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 000C3D9B64DE89C3192B4DE5 /* URLSessionHTTPClientTests.swift */; };
+		3C6BA94CEFA9AA638B7DAFE5 /* RemoteDataLoaderTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3A5628C163D6097BA26CA86 /* RemoteDataLoaderTest.swift */; };
+		60D8D489F5E294AD9B99CB0E /* URLSessionHTTPClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1525E660360B300F88FEB9AA /* URLSessionHTTPClient.swift */; };
+		73B28D1A044D4555DBF2BF34 /* AppError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03A2CF8286DD900067CDF9C4 /* AppError.swift */; };
 		7F4ACF6FCF2264BF88E7FD15 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0AA2FC9BDA1C8F1197DE7D8 /* SceneDelegate.swift */; };
 		8B9157E4972623E7FAC41027 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 71CE5E7793D05666AF79BF79 /* LaunchScreen.storyboard */; };
-		B0B51A8BC54129613A6651F0 /* CleanArchWithUIKitDemoTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 049703F9C8E3C661276828F0 /* CleanArchWithUIKitDemoTests.swift */; };
+		8D49D28DA1F95DB97CE489FB /* RemoteDataLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3C588145448A58E401415F2 /* RemoteDataLoader.swift */; };
+		CF76714FE2DFDA29A6296040 /* HTTPClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7A12C60B3A5B0B5B231EDE0 /* HTTPClient.swift */; };
+		CF893DAC2BC45494AE96CAEA /* ApiConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91CB000339FF729FA8902297 /* ApiConfig.swift */; };
 		D2C307C5FCE587DDE8A010DE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DC4B9F6315A8B7267BFDF7CF /* Assets.xcassets */; };
 		E74AE78DF1CEF697DCF14378 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A74EB896AE2B6BEB9A905BFA /* AppDelegate.swift */; };
+		F94E48699001C8FE674763F0 /* DataServiceLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2669A258EA45F99D73A4A3C /* DataServiceLoader.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -27,13 +35,21 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		049703F9C8E3C661276828F0 /* CleanArchWithUIKitDemoTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CleanArchWithUIKitDemoTests.swift; sourceTree = "<group>"; };
+		000C3D9B64DE89C3192B4DE5 /* URLSessionHTTPClientTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLSessionHTTPClientTests.swift; sourceTree = "<group>"; };
+		03A2CF8286DD900067CDF9C4 /* AppError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppError.swift; sourceTree = "<group>"; };
+		1525E660360B300F88FEB9AA /* URLSessionHTTPClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLSessionHTTPClient.swift; sourceTree = "<group>"; };
 		69EBC17BA171E32DF6C6C73B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		76507DBAB23374424B06B411 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		91CB000339FF729FA8902297 /* ApiConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiConfig.swift; sourceTree = "<group>"; };
 		93BA51166B8F0727CFDB9541 /* CleanArchWithUIKitDemoTests.xctest */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.cfbundle; path = CleanArchWithUIKitDemoTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		A74EB896AE2B6BEB9A905BFA /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B0AA2FC9BDA1C8F1197DE7D8 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		B0C8ECEA19DC2184FC7C569F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		B3A5628C163D6097BA26CA86 /* RemoteDataLoaderTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteDataLoaderTest.swift; sourceTree = "<group>"; };
+		C7A12C60B3A5B0B5B231EDE0 /* HTTPClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPClient.swift; sourceTree = "<group>"; };
+		D2669A258EA45F99D73A4A3C /* DataServiceLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataServiceLoader.swift; sourceTree = "<group>"; };
+		D3C588145448A58E401415F2 /* RemoteDataLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteDataLoader.swift; sourceTree = "<group>"; };
+		D8B79E516E095D0CE1E81BEF /* SharedTestHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharedTestHelpers.swift; sourceTree = "<group>"; };
 		DC4B9F6315A8B7267BFDF7CF /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		E14C4FE8C651C82B457F6955 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		F72216DA2E124354586EF51E /* CleanArchWithUIKitDemo.app */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.application; path = CleanArchWithUIKitDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -52,9 +68,19 @@
 		221CB5F74E817C23E35B5D70 /* CleanArchWithUIKitDemoTests */ = {
 			isa = PBXGroup;
 			children = (
-				049703F9C8E3C661276828F0 /* CleanArchWithUIKitDemoTests.swift */,
+				B3A5628C163D6097BA26CA86 /* RemoteDataLoaderTest.swift */,
+				000C3D9B64DE89C3192B4DE5 /* URLSessionHTTPClientTests.swift */,
+				B6BEB15108144BB5A35AF4AF /* Helpers */,
 			);
 			path = CleanArchWithUIKitDemoTests;
+			sourceTree = "<group>";
+		};
+		55FED2A47D7DBC2BB93E249D /* Infrastructure */ = {
+			isa = PBXGroup;
+			children = (
+				5DBAD8E7E3DF5A4F8DA2529E /* Network */,
+			);
+			path = Infrastructure;
 			sourceTree = "<group>";
 		};
 		57E828B05FE267D632022F25 /* Products */ = {
@@ -64,6 +90,19 @@
 				93BA51166B8F0727CFDB9541 /* CleanArchWithUIKitDemoTests.xctest */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		5DBAD8E7E3DF5A4F8DA2529E /* Network */ = {
+			isa = PBXGroup;
+			children = (
+				91CB000339FF729FA8902297 /* ApiConfig.swift */,
+				03A2CF8286DD900067CDF9C4 /* AppError.swift */,
+				D2669A258EA45F99D73A4A3C /* DataServiceLoader.swift */,
+				C7A12C60B3A5B0B5B231EDE0 /* HTTPClient.swift */,
+				D3C588145448A58E401415F2 /* RemoteDataLoader.swift */,
+				1525E660360B300F88FEB9AA /* URLSessionHTTPClient.swift */,
+			);
+			path = Network;
 			sourceTree = "<group>";
 		};
 		8230501567DB1E2B59D12D2B /* Resources */ = {
@@ -94,10 +133,19 @@
 			);
 			sourceTree = "<group>";
 		};
+		B6BEB15108144BB5A35AF4AF /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				D8B79E516E095D0CE1E81BEF /* SharedTestHelpers.swift */,
+			);
+			path = Helpers;
+			sourceTree = "<group>";
+		};
 		ED6A4143C0F5C6606630EB64 /* CleanArchWithUIKitDemo */ = {
 			isa = PBXGroup;
 			children = (
 				9BFE48B0DA0B09B29C1E4CCB /* Application */,
+				55FED2A47D7DBC2BB93E249D /* Infrastructure */,
 				1395B7A04D5B272B90BB5A3A /* Presentation */,
 				8230501567DB1E2B59D12D2B /* Resources */,
 			);
@@ -186,7 +234,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B0B51A8BC54129613A6651F0 /* CleanArchWithUIKitDemoTests.swift in Sources */,
+				3C6BA94CEFA9AA638B7DAFE5 /* RemoteDataLoaderTest.swift in Sources */,
+				0950120BF7C173755DABD5F2 /* SharedTestHelpers.swift in Sources */,
+				34E61E434CC180526271B775 /* URLSessionHTTPClientTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -194,8 +244,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CF893DAC2BC45494AE96CAEA /* ApiConfig.swift in Sources */,
 				E74AE78DF1CEF697DCF14378 /* AppDelegate.swift in Sources */,
+				73B28D1A044D4555DBF2BF34 /* AppError.swift in Sources */,
+				F94E48699001C8FE674763F0 /* DataServiceLoader.swift in Sources */,
+				CF76714FE2DFDA29A6296040 /* HTTPClient.swift in Sources */,
+				8D49D28DA1F95DB97CE489FB /* RemoteDataLoader.swift in Sources */,
 				7F4ACF6FCF2264BF88E7FD15 /* SceneDelegate.swift in Sources */,
+				60D8D489F5E294AD9B99CB0E /* URLSessionHTTPClient.swift in Sources */,
 				01477029A3E7640E4BCD971A /* ViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
