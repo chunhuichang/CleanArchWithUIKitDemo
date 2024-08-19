@@ -9,10 +9,10 @@
 /* Begin PBXBuildFile section */
 		01477029A3E7640E4BCD971A /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E14C4FE8C651C82B457F6955 /* ViewController.swift */; };
 		0950120BF7C173755DABD5F2 /* SharedTestHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8B79E516E095D0CE1E81BEF /* SharedTestHelpers.swift */; };
+		1FB60005EBEFBD5CFA0C98EE /* URLSessionHTTPClientTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ADD1A1C1A8D8EBA7FAD5AF2 /* URLSessionHTTPClientTests.swift */; };
 		2CAA50840C408DA140BB2058 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9B814066CE1BB97965546D7D /* Main.storyboard */; };
-		34E61E434CC180526271B775 /* URLSessionHTTPClientTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 000C3D9B64DE89C3192B4DE5 /* URLSessionHTTPClientTests.swift */; };
-		3C6BA94CEFA9AA638B7DAFE5 /* RemoteDataLoaderTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3A5628C163D6097BA26CA86 /* RemoteDataLoaderTest.swift */; };
 		60D8D489F5E294AD9B99CB0E /* URLSessionHTTPClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1525E660360B300F88FEB9AA /* URLSessionHTTPClient.swift */; };
+		6822B3AA5BC25E2318DE3EAE /* RemoteDataLoaderTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5107DA060E111FE55AC5CABB /* RemoteDataLoaderTest.swift */; };
 		73B28D1A044D4555DBF2BF34 /* AppError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03A2CF8286DD900067CDF9C4 /* AppError.swift */; };
 		7F4ACF6FCF2264BF88E7FD15 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0AA2FC9BDA1C8F1197DE7D8 /* SceneDelegate.swift */; };
 		8B9157E4972623E7FAC41027 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 71CE5E7793D05666AF79BF79 /* LaunchScreen.storyboard */; };
@@ -35,9 +35,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		000C3D9B64DE89C3192B4DE5 /* URLSessionHTTPClientTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLSessionHTTPClientTests.swift; sourceTree = "<group>"; };
 		03A2CF8286DD900067CDF9C4 /* AppError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppError.swift; sourceTree = "<group>"; };
 		1525E660360B300F88FEB9AA /* URLSessionHTTPClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLSessionHTTPClient.swift; sourceTree = "<group>"; };
+		2ADD1A1C1A8D8EBA7FAD5AF2 /* URLSessionHTTPClientTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLSessionHTTPClientTests.swift; sourceTree = "<group>"; };
+		5107DA060E111FE55AC5CABB /* RemoteDataLoaderTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteDataLoaderTest.swift; sourceTree = "<group>"; };
 		69EBC17BA171E32DF6C6C73B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		76507DBAB23374424B06B411 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		91CB000339FF729FA8902297 /* ApiConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiConfig.swift; sourceTree = "<group>"; };
@@ -45,7 +46,6 @@
 		A74EB896AE2B6BEB9A905BFA /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B0AA2FC9BDA1C8F1197DE7D8 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		B0C8ECEA19DC2184FC7C569F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
-		B3A5628C163D6097BA26CA86 /* RemoteDataLoaderTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteDataLoaderTest.swift; sourceTree = "<group>"; };
 		C7A12C60B3A5B0B5B231EDE0 /* HTTPClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPClient.swift; sourceTree = "<group>"; };
 		D2669A258EA45F99D73A4A3C /* DataServiceLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataServiceLoader.swift; sourceTree = "<group>"; };
 		D3C588145448A58E401415F2 /* RemoteDataLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteDataLoader.swift; sourceTree = "<group>"; };
@@ -68,11 +68,18 @@
 		221CB5F74E817C23E35B5D70 /* CleanArchWithUIKitDemoTests */ = {
 			isa = PBXGroup;
 			children = (
-				B3A5628C163D6097BA26CA86 /* RemoteDataLoaderTest.swift */,
-				000C3D9B64DE89C3192B4DE5 /* URLSessionHTTPClientTests.swift */,
 				B6BEB15108144BB5A35AF4AF /* Helpers */,
+				37A073B2F99174CDF797BD16 /* Infrastructure */,
 			);
 			path = CleanArchWithUIKitDemoTests;
+			sourceTree = "<group>";
+		};
+		37A073B2F99174CDF797BD16 /* Infrastructure */ = {
+			isa = PBXGroup;
+			children = (
+				C9652016DAB3376E94022004 /* Network */,
+			);
+			path = Infrastructure;
 			sourceTree = "<group>";
 		};
 		55FED2A47D7DBC2BB93E249D /* Infrastructure */ = {
@@ -139,6 +146,15 @@
 				D8B79E516E095D0CE1E81BEF /* SharedTestHelpers.swift */,
 			);
 			path = Helpers;
+			sourceTree = "<group>";
+		};
+		C9652016DAB3376E94022004 /* Network */ = {
+			isa = PBXGroup;
+			children = (
+				5107DA060E111FE55AC5CABB /* RemoteDataLoaderTest.swift */,
+				2ADD1A1C1A8D8EBA7FAD5AF2 /* URLSessionHTTPClientTests.swift */,
+			);
+			path = Network;
 			sourceTree = "<group>";
 		};
 		ED6A4143C0F5C6606630EB64 /* CleanArchWithUIKitDemo */ = {
@@ -234,9 +250,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3C6BA94CEFA9AA638B7DAFE5 /* RemoteDataLoaderTest.swift in Sources */,
+				6822B3AA5BC25E2318DE3EAE /* RemoteDataLoaderTest.swift in Sources */,
 				0950120BF7C173755DABD5F2 /* SharedTestHelpers.swift in Sources */,
-				34E61E434CC180526271B775 /* URLSessionHTTPClientTests.swift in Sources */,
+				1FB60005EBEFBD5CFA0C98EE /* URLSessionHTTPClientTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
