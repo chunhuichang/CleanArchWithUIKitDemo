@@ -14,11 +14,13 @@ public protocol AppError: Error {
 public enum CommonError: AppError {
     case decodingError(Error)
     case unexpectedError(Error)
+    case convertToEntityError
 
     public var errorDescription: String {
         switch self {
         case .decodingError(let error): "Decoding Error: \(error.localizedDescription)"
         case .unexpectedError(let message): "Unexpected Error: \(message)"
+        case .convertToEntityError: "Convert DTO To Entity Error"
         }
     }
 }
