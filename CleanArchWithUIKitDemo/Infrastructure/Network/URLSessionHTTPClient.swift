@@ -14,7 +14,7 @@ public protocol URLSessionProtocol {
 
 extension URLSession: URLSessionProtocol {}
 
-public class URLSessionHTTPClient: HTTPClient {
+public struct URLSessionHTTPClient: HTTPClient {
     private let session: URLSessionProtocol
 
     public init(session: URLSessionProtocol = URLSession.shared) {

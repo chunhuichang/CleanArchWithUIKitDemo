@@ -7,7 +7,7 @@
 
 import Foundation
 
-public final class RemoteDataLoader: DataServiceLoader {
+public struct RemoteDataLoader: DataServiceLoader {
     private let client: HTTPClient
 
     public init(client: HTTPClient) {

@@ -7,7 +7,7 @@
 
 import Foundation
 
-public final class MainExchangeRateListRepository: ExchangeRateListRepository {
+public struct MainExchangeRateListRepository: ExchangeRateListRepository {
     private let loadDataLoader: DataServiceLoader
 
     public init(loadDataLoader: DataServiceLoader) {
