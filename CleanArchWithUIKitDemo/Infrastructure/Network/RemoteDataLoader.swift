@@ -10,7 +10,7 @@ import Foundation
 public final class RemoteDataLoader: DataServiceLoader {
     private let client: HTTPClient
 
-    init(client: HTTPClient) {
+    public init(client: HTTPClient) {
         self.client = client
     }
 

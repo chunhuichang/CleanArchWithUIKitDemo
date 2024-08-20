@@ -8,6 +8,13 @@
 import Foundation
 
 public struct ExchangeRateEntity {
+    public init(base: Currency, date: String, timeLastUpdated: Int, rates: [Currency: Double]) {
+        self.base = base
+        self.date = date
+        self.timeLastUpdated = timeLastUpdated
+        self.rates = rates
+    }
+
     public let base: Currency
     public let date: String
     public let timeLastUpdated: Int
