@@ -40,6 +40,25 @@ schemes:
     archive:
       config: Release
 
+  CI:
+    build:
+      targets:
+        CleanArchWithUIKitDemo: all
+    run:
+      config: Debug
+    test:
+      config: Debug
+      targets:
+        - CleanArchWithUIKitDemoTests
+        - CleanArchWithUIKitDemoAPIEndToEndTests
+      gatherCoverageData: true
+    profile:
+      config: Release
+    analyze:
+      config: Debug
+    archive:
+      config: Release      
+
 ############
 # Targets
 ############
@@ -65,3 +84,15 @@ targets:
     settings:
       base:
         GENERATE_INFOPLIST_FILE: YES
+
+
+  CleanArchWithUIKitDemoAPIEndToEndTests:
+    type: bundle.unit-test
+    platform: iOS
+    sources:
+      - path: CleanArchWithUIKitDemoAPIEndToEndTests
+    dependencies:
+      - target: CleanArchWithUIKitDemo 
+    settings:
+      base:
+        GENERATE_INFOPLIST_FILE: YES        

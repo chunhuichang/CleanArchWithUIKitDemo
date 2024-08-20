@@ -17,9 +17,9 @@ public enum DataLoaderError: AppError {
     }
 }
 
-public protocol DataServiceLoader {
-    typealias DataLoaderResult<T> = Result<T, Error>
+public typealias DataLoaderResult<T> = Result<T, Error>
 
+public protocol DataServiceLoader {
     func load<T: Decodable>(config: ApiConfig) async -> DataLoaderResult<T>
 }
 

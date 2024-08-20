@@ -7,17 +7,17 @@
 
 import Foundation
 
-protocol URLSessionProtocol {
+public protocol URLSessionProtocol {
     func data(from url: URL) async throws -> (Data, URLResponse)
     func data(for request: URLRequest) async throws -> (Data, URLResponse)
 }
 
 extension URLSession: URLSessionProtocol {}
 
-public class URLSessionHTTPClient: HTTPClient {
+public struct URLSessionHTTPClient: HTTPClient {
     private let session: URLSessionProtocol
 
-    init(session: URLSessionProtocol = URLSession.shared) {
+    public init(session: URLSessionProtocol = URLSession.shared) {
         self.session = session
     }
 
