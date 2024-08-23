@@ -31,7 +31,7 @@ struct ExchangeRateListUseCaseTests {
     @Test
     func exchangeRate_deliversEntityOnSuccess() async {
         let baseCurrency = Currency.USD
-        let predicateEntity = ExchangeRateEntity(base: baseCurrency, date: "2024-8-20", timeLastUpdated: Int(Date().timeIntervalSinceNow), rates: [.USD: 1, .TWD: 32.09, .JPY: 148.04, .EUR: 0.908])
+        let predicateEntity = ExchangeRateEntity(base: baseCurrency, date: "2024-8-20", timeLastUpdated: Int(Date().timeIntervalSinceNow), rates: [(.USD, 1), (.TWD, 32.09), (.JPY, 148.04), (.EUR, 0.908)])
 
         let sut = makeSUT(result: .success(predicateEntity))
 
@@ -43,7 +43,7 @@ struct ExchangeRateListUseCaseTests {
             #expect(entity.date == predicateEntity.date)
             #expect(entity.timeLastUpdated == predicateEntity.timeLastUpdated)
             #expect(entity.rates.count == predicateEntity.rates.count)
-            #expect(entity.rates[baseCurrency] == predicateEntity.rates[baseCurrency])
+            #expect(entity.getRate(with: baseCurrency) == predicateEntity.getRate(with: baseCurrency))
         default:
             Issue.record("Expected success, got \(result) instead")
         }

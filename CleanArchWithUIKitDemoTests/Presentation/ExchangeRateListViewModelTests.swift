@@ -31,7 +31,7 @@ class ExchangeRateListViewModelTests: XCTestCase {
 
     func test_correctDataTrigger_successExchangeRateListGetEntity() async {
         let baseCurrency = Currency.USD
-        let predicateEntity = ExchangeRateEntity(base: baseCurrency, date: "2024-8-20", timeLastUpdated: Int(Date().timeIntervalSinceNow), rates: [.USD: 1, .TWD: 32.09, .JPY: 148.04, .EUR: 0.908])
+        let predicateEntity = ExchangeRateEntity(base: baseCurrency, date: "2024-8-20", timeLastUpdated: Int(Date().timeIntervalSinceNow), rates: [(.USD, 1), (.TWD, 32.09), (.JPY, 148.04), (.EUR, 0.908)])
         var (sut, cancellable) = makeSUT(result: .success(predicateEntity))
 
         let exp = expectation(description: "Wait for ExchangeRateList")
@@ -45,7 +45,7 @@ class ExchangeRateListViewModelTests: XCTestCase {
                 XCTAssertEqual(entity?.date, predicateEntity.date)
                 XCTAssertEqual(entity?.timeLastUpdated, predicateEntity.timeLastUpdated)
                 XCTAssertEqual(entity?.rates.count, predicateEntity.rates.count)
-                XCTAssertEqual(entity?.rates[baseCurrency], predicateEntity.rates[baseCurrency])
+                XCTAssertEqual(entity?.getRate(with: baseCurrency), predicateEntity.getRate(with: baseCurrency))
                 exp.fulfill()
             })
             .store(in: &cancellable)
@@ -70,7 +70,7 @@ private struct MockUseCase: ExchangeRateListUseCase {
         self.result = result
     }
 
-    func exchangeRateList(with base: Currency) async -> Result<CleanArchWithUIKitDemo.ExchangeRateEntity, any Error> {
+    func exchangeRateList(with base: Currency) async -> Result<ExchangeRateEntity, any Error> {
         result
     }
 }

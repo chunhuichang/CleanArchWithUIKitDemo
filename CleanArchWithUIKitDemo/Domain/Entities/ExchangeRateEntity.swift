@@ -8,7 +8,7 @@
 import Foundation
 
 public struct ExchangeRateEntity {
-    public init(base: Currency, date: String, timeLastUpdated: Int, rates: [Currency: Double]) {
+    public init(base: Currency, date: String, timeLastUpdated: Int, rates: [(Currency, Double)]) {
         self.base = base
         self.date = date
         self.timeLastUpdated = timeLastUpdated
@@ -18,7 +18,13 @@ public struct ExchangeRateEntity {
     public let base: Currency
     public let date: String
     public let timeLastUpdated: Int
-    public let rates: [Currency: Double]
+    public let rates: [(currency: Currency, rate: Double)]
+}
+
+public extension ExchangeRateEntity {
+    func getRate(with currency: Currency) -> Double? {
+        rates.filter { $0.currency == currency }.first?.rate
+    }
 }
 
 public enum CommonCurrency: String, CaseIterable {

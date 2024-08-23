@@ -40,15 +40,15 @@ public extension ExchangeRateDTO {
 }
 
 private extension ExchangeRateDTO {
-    func convertRates(_ rates: [String: Double]) throws -> [Currency: Double] {
-        var ratesDictionary: [Currency: Double] = [:]
+    func convertRates(_ rates: [String: Double]) throws -> [(Currency, Double)] {
+        var ratesList: [(Currency, Double)] = []
         for (key, value) in rates {
             if let currency = Currency(rawValue: key) {
-                ratesDictionary[currency] = value
+                ratesList.append((currency, value))
             } else {
                 throw CommonError.convertToEntityError
             }
         }
-        return ratesDictionary
+        return ratesList
     }
 }
