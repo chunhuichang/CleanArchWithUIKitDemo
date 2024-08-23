@@ -208,7 +208,7 @@ struct ExchangeRateTests {
         #expect(entity.date == "2024-08-19")
         #expect(entity.timeLastUpdated == 1724025601)
         #expect(entity.rates.count == 162)
-        #expect(entity.rates[baseCurrency] == 1)
+        #expect(entity.getRate(with: baseCurrency) == 1)
     }
     
     @Test

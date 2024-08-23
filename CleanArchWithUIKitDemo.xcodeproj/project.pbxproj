@@ -13,6 +13,8 @@
 		1FB60005EBEFBD5CFA0C98EE /* URLSessionHTTPClientTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ADD1A1C1A8D8EBA7FAD5AF2 /* URLSessionHTTPClientTests.swift */; };
 		2115B53ED05D833C09D66E1F /* ExchangeRateListUseCaseTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E3364867B6D0088F377985E /* ExchangeRateListUseCaseTests.swift */; };
 		2CAA50840C408DA140BB2058 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9B814066CE1BB97965546D7D /* Main.storyboard */; };
+		2FF5DD4B5AD02973EACE3207 /* ExchangeRateListViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EE4A32FE5B3A55440EF3D49 /* ExchangeRateListViewControllerTests.swift */; };
+		32ADD754BEB09139AE59D8A1 /* XCTestCase+MemoryLeakTracking.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECA0B40846574AF0A14A5A10 /* XCTestCase+MemoryLeakTracking.swift */; };
 		48ED46D5B0A9FE33DBBBC445 /* ExchangeRateTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E830BAFEFC050496A59B788 /* ExchangeRateTests.swift */; };
 		518DD42AFB672D323296CDE3 /* ExchangeRateEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A3520E503665029DA4A7BD3 /* ExchangeRateEntity.swift */; };
 		60D8D489F5E294AD9B99CB0E /* URLSessionHTTPClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1525E660360B300F88FEB9AA /* URLSessionHTTPClient.swift */; };
@@ -23,14 +25,18 @@
 		89FE5AD78CFF89CC9C86CC90 /* ExchangeRateListAPIEndToEndTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D167F7CFCB7817733D32132D /* ExchangeRateListAPIEndToEndTests.swift */; };
 		8B9157E4972623E7FAC41027 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 71CE5E7793D05666AF79BF79 /* LaunchScreen.storyboard */; };
 		8D49D28DA1F95DB97CE489FB /* RemoteDataLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3C588145448A58E401415F2 /* RemoteDataLoader.swift */; };
+		B1A070BD45F4F72A64FF75C6 /* ExchangeRateListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6ACBAAF0DC970817F073C86C /* ExchangeRateListViewController.swift */; };
 		BE4AFE404A67B76651B29109 /* ExchangeRateDTO+Mapping.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8D29A1CEF64599E259EF8F7 /* ExchangeRateDTO+Mapping.swift */; };
 		CF0E5AED8B85A6F657A494EB /* MainExchangeRateListRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83C33EDD9812C9E00F70A800 /* MainExchangeRateListRepository.swift */; };
+		CF4101B433C78ECAD7CEEBD4 /* ExchangeRateListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EE12B9A644CEDBB9BA15FB2 /* ExchangeRateListViewModel.swift */; };
 		CF76714FE2DFDA29A6296040 /* HTTPClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7A12C60B3A5B0B5B231EDE0 /* HTTPClient.swift */; };
 		CF893DAC2BC45494AE96CAEA /* ApiConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91CB000339FF729FA8902297 /* ApiConfig.swift */; };
 		D2C307C5FCE587DDE8A010DE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DC4B9F6315A8B7267BFDF7CF /* Assets.xcassets */; };
+		E345F49B385CE7F0B9F44D7E /* ExchangeRateListViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BED2173110819E60B516F6FF /* ExchangeRateListViewModelTests.swift */; };
 		E5A08047553028F2FE83AF94 /* ExchangeRateListRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99D7A78B293EA0BDED992FDD /* ExchangeRateListRepository.swift */; };
 		E74AE78DF1CEF697DCF14378 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A74EB896AE2B6BEB9A905BFA /* AppDelegate.swift */; };
 		F94E48699001C8FE674763F0 /* DataServiceLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2669A258EA45F99D73A4A3C /* DataServiceLoader.swift */; };
+		FADBFC318DFD565BD8A9E964 /* UIViewController+Lifecycle.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6E7FCC9CF6DB0A3572F68AF /* UIViewController+Lifecycle.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -56,27 +62,33 @@
 		2ADD1A1C1A8D8EBA7FAD5AF2 /* URLSessionHTTPClientTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLSessionHTTPClientTests.swift; sourceTree = "<group>"; };
 		2E830BAFEFC050496A59B788 /* ExchangeRateTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExchangeRateTests.swift; sourceTree = "<group>"; };
 		3E3364867B6D0088F377985E /* ExchangeRateListUseCaseTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExchangeRateListUseCaseTests.swift; sourceTree = "<group>"; };
+		3EE12B9A644CEDBB9BA15FB2 /* ExchangeRateListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExchangeRateListViewModel.swift; sourceTree = "<group>"; };
 		4F4E27C0991054312891959F /* CleanArchWithUIKitDemoAPIEndToEndTests.xctest */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.cfbundle; path = CleanArchWithUIKitDemoAPIEndToEndTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		5107DA060E111FE55AC5CABB /* RemoteDataLoaderTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteDataLoaderTest.swift; sourceTree = "<group>"; };
 		55EED36C5382979EEEAF4E5E /* ExchangeRateListUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExchangeRateListUseCase.swift; sourceTree = "<group>"; };
 		69EBC17BA171E32DF6C6C73B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		6A3520E503665029DA4A7BD3 /* ExchangeRateEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExchangeRateEntity.swift; sourceTree = "<group>"; };
+		6ACBAAF0DC970817F073C86C /* ExchangeRateListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExchangeRateListViewController.swift; sourceTree = "<group>"; };
 		76507DBAB23374424B06B411 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		83C33EDD9812C9E00F70A800 /* MainExchangeRateListRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainExchangeRateListRepository.swift; sourceTree = "<group>"; };
 		91CB000339FF729FA8902297 /* ApiConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiConfig.swift; sourceTree = "<group>"; };
 		93BA51166B8F0727CFDB9541 /* CleanArchWithUIKitDemoTests.xctest */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.cfbundle; path = CleanArchWithUIKitDemoTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		99D7A78B293EA0BDED992FDD /* ExchangeRateListRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExchangeRateListRepository.swift; sourceTree = "<group>"; };
+		9EE4A32FE5B3A55440EF3D49 /* ExchangeRateListViewControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExchangeRateListViewControllerTests.swift; sourceTree = "<group>"; };
 		A74EB896AE2B6BEB9A905BFA /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		A8D29A1CEF64599E259EF8F7 /* ExchangeRateDTO+Mapping.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ExchangeRateDTO+Mapping.swift"; sourceTree = "<group>"; };
 		B0AA2FC9BDA1C8F1197DE7D8 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		B0C8ECEA19DC2184FC7C569F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		BED2173110819E60B516F6FF /* ExchangeRateListViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExchangeRateListViewModelTests.swift; sourceTree = "<group>"; };
 		C7A12C60B3A5B0B5B231EDE0 /* HTTPClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPClient.swift; sourceTree = "<group>"; };
 		D167F7CFCB7817733D32132D /* ExchangeRateListAPIEndToEndTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExchangeRateListAPIEndToEndTests.swift; sourceTree = "<group>"; };
 		D2669A258EA45F99D73A4A3C /* DataServiceLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataServiceLoader.swift; sourceTree = "<group>"; };
 		D3C588145448A58E401415F2 /* RemoteDataLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteDataLoader.swift; sourceTree = "<group>"; };
+		D6E7FCC9CF6DB0A3572F68AF /* UIViewController+Lifecycle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Lifecycle.swift"; sourceTree = "<group>"; };
 		D8B79E516E095D0CE1E81BEF /* SharedTestHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharedTestHelpers.swift; sourceTree = "<group>"; };
 		DC4B9F6315A8B7267BFDF7CF /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		E14C4FE8C651C82B457F6955 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		ECA0B40846574AF0A14A5A10 /* XCTestCase+MemoryLeakTracking.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "XCTestCase+MemoryLeakTracking.swift"; sourceTree = "<group>"; };
 		EE7CDC4B8BF8AC08D7511B97 /* ExchangeRateListApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExchangeRateListApi.swift; sourceTree = "<group>"; };
 		F72216DA2E124354586EF51E /* CleanArchWithUIKitDemo.app */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.application; path = CleanArchWithUIKitDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -93,6 +105,8 @@
 		1395B7A04D5B272B90BB5A3A /* Presentation */ = {
 			isa = PBXGroup;
 			children = (
+				6ACBAAF0DC970817F073C86C /* ExchangeRateListViewController.swift */,
+				3EE12B9A644CEDBB9BA15FB2 /* ExchangeRateListViewModel.swift */,
 				9B814066CE1BB97965546D7D /* Main.storyboard */,
 				E14C4FE8C651C82B457F6955 /* ViewController.swift */,
 			);
@@ -105,6 +119,7 @@
 				F99A689A69BBEE6BB2519319 /* Domain */,
 				B6BEB15108144BB5A35AF4AF /* Helpers */,
 				37A073B2F99174CDF797BD16 /* Infrastructure */,
+				999611FC558585FF11C7F2E6 /* Presentation */,
 			);
 			path = CleanArchWithUIKitDemoTests;
 			sourceTree = "<group>";
@@ -226,6 +241,15 @@
 			path = Repositories;
 			sourceTree = "<group>";
 		};
+		999611FC558585FF11C7F2E6 /* Presentation */ = {
+			isa = PBXGroup;
+			children = (
+				9EE4A32FE5B3A55440EF3D49 /* ExchangeRateListViewControllerTests.swift */,
+				BED2173110819E60B516F6FF /* ExchangeRateListViewModelTests.swift */,
+			);
+			path = Presentation;
+			sourceTree = "<group>";
+		};
 		9BFE48B0DA0B09B29C1E4CCB /* Application */ = {
 			isa = PBXGroup;
 			children = (
@@ -257,6 +281,8 @@
 			isa = PBXGroup;
 			children = (
 				D8B79E516E095D0CE1E81BEF /* SharedTestHelpers.swift */,
+				D6E7FCC9CF6DB0A3572F68AF /* UIViewController+Lifecycle.swift */,
+				ECA0B40846574AF0A14A5A10 /* XCTestCase+MemoryLeakTracking.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -432,10 +458,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				2115B53ED05D833C09D66E1F /* ExchangeRateListUseCaseTests.swift in Sources */,
+				2FF5DD4B5AD02973EACE3207 /* ExchangeRateListViewControllerTests.swift in Sources */,
+				E345F49B385CE7F0B9F44D7E /* ExchangeRateListViewModelTests.swift in Sources */,
 				48ED46D5B0A9FE33DBBBC445 /* ExchangeRateTests.swift in Sources */,
 				6822B3AA5BC25E2318DE3EAE /* RemoteDataLoaderTest.swift in Sources */,
 				0950120BF7C173755DABD5F2 /* SharedTestHelpers.swift in Sources */,
+				FADBFC318DFD565BD8A9E964 /* UIViewController+Lifecycle.swift in Sources */,
 				1FB60005EBEFBD5CFA0C98EE /* URLSessionHTTPClientTests.swift in Sources */,
+				32ADD754BEB09139AE59D8A1 /* XCTestCase+MemoryLeakTracking.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -460,6 +490,8 @@
 				656B4DBBA5F6BB077901791E /* ExchangeRateListApi.swift in Sources */,
 				E5A08047553028F2FE83AF94 /* ExchangeRateListRepository.swift in Sources */,
 				12BD66BD47789D90B4BE0297 /* ExchangeRateListUseCase.swift in Sources */,
+				B1A070BD45F4F72A64FF75C6 /* ExchangeRateListViewController.swift in Sources */,
+				CF4101B433C78ECAD7CEEBD4 /* ExchangeRateListViewModel.swift in Sources */,
 				CF76714FE2DFDA29A6296040 /* HTTPClient.swift in Sources */,
 				CF0E5AED8B85A6F657A494EB /* MainExchangeRateListRepository.swift in Sources */,
 				8D49D28DA1F95DB97CE489FB /* RemoteDataLoader.swift in Sources */,
