@@ -25,7 +25,7 @@ class ExchangeRateListViewModelTests: XCTestCase {
                 exp.fulfill()
             }
             .store(in: &cancellable)
-        await sut.viewDidLoad()
+        sut.viewDidLoad()
         await fulfillment(of: [exp])
     }
 
@@ -49,7 +49,7 @@ class ExchangeRateListViewModelTests: XCTestCase {
                 exp.fulfill()
             })
             .store(in: &cancellable)
-        await sut.viewDidLoad()
+        sut.viewDidLoad()
         await fulfillment(of: [exp])
     }
 }

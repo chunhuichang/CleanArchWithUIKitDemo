@@ -9,7 +9,7 @@ import Foundation
 
 // Input
 public protocol ExchangeRateListVMInput {
-    func viewDidLoad() async
+    func viewDidLoad()
 }
 
 // Output
@@ -33,7 +33,7 @@ public final class ExchangeRateListViewModel: ExchangeRateListVMOutput {
 }
 
 extension ExchangeRateListViewModel: ExchangeRateListVMInput {
-    public func viewDidLoad() async {
+    public func viewDidLoad() {
         Task {
             isLoading = true
             let result = await usecase.exchangeRateList(with: .USD)
