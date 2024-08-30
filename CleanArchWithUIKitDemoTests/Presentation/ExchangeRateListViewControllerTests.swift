@@ -39,7 +39,7 @@ private extension ExchangeRateListViewControllerTests {
     }
 
     func makeSUTWithSuccessResult(file: StaticString = #filePath, line: UInt = #line) -> (viewController: ExchangeRateListViewController, entity: ExchangeRateEntity) {
-        let predicateEntity = ExchangeRateEntity(base: .USD, date: "2024-8-20", timeLastUpdated: Int(Date().timeIntervalSinceNow), rates: [(.USD, 1), (.TWD, 32.09), (.JPY, 148.04), (.EUR, 0.908)])
+        let predicateEntity = ExchangeRateEntity.mockValue
         return (makeSUT(result: .success(predicateEntity)), predicateEntity)
     }
 }

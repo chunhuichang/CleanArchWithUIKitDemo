@@ -31,7 +31,7 @@ class ExchangeRateListViewModelTests: XCTestCase {
 
     func test_correctDataTrigger_successExchangeRateListGetEntity() async {
         let baseCurrency = Currency.USD
-        let predicateEntity = ExchangeRateEntity(base: baseCurrency, date: "2024-8-20", timeLastUpdated: Int(Date().timeIntervalSinceNow), rates: [(.USD, 1), (.TWD, 32.09), (.JPY, 148.04), (.EUR, 0.908)])
+        let predicateEntity = ExchangeRateEntity.mockValue
         var (sut, cancellable) = makeSUT(result: .success(predicateEntity))
 
         let exp = expectation(description: "Wait for ExchangeRateList")

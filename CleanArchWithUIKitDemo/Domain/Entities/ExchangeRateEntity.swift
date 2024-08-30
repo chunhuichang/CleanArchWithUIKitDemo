@@ -8,7 +8,17 @@
 import Foundation
 
 public struct ExchangeRateEntity {
-    public init(base: Currency, date: String, timeLastUpdated: Int, rates: [(Currency, Double)]) {
+    public struct RateEntity {
+        public let currency: Currency
+        public let rate: Double
+
+        public init(currency: Currency, rate: Double) {
+            self.currency = currency
+            self.rate = rate
+        }
+    }
+
+    public init(base: Currency, date: String, timeLastUpdated: Int, rates: [RateEntity]) {
         self.base = base
         self.date = date
         self.timeLastUpdated = timeLastUpdated
@@ -18,12 +28,19 @@ public struct ExchangeRateEntity {
     public let base: Currency
     public let date: String
     public let timeLastUpdated: Int
-    public let rates: [(currency: Currency, rate: Double)]
+    public let rates: [RateEntity]
 }
 
 public extension ExchangeRateEntity {
     func getRate(with currency: Currency) -> Double? {
         rates.filter { $0.currency == currency }.first?.rate
+    }
+}
+
+extension ExchangeRateEntity: MockEntity {
+    public typealias T = Self
+    public static var mockValue: ExchangeRateEntity {
+        ExchangeRateEntity(base: .USD, date: "2024-8-20", timeLastUpdated: Int(Date().timeIntervalSinceNow), rates: [ExchangeRateEntity.RateEntity(currency: .USD, rate: 1), ExchangeRateEntity.RateEntity(currency: .TWD, rate: 32.09), ExchangeRateEntity.RateEntity(currency: .JPY, rate: 148.04), ExchangeRateEntity.RateEntity(currency: .EUR, rate: 0.908)])
     }
 }
 

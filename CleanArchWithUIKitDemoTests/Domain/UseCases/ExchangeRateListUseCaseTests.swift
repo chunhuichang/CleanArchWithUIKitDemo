@@ -31,8 +31,7 @@ struct ExchangeRateListUseCaseTests {
     @Test
     func exchangeRate_deliversEntityOnSuccess() async {
         let baseCurrency = Currency.USD
-        let predicateEntity = ExchangeRateEntity(base: baseCurrency, date: "2024-8-20", timeLastUpdated: Int(Date().timeIntervalSinceNow), rates: [(.USD, 1), (.TWD, 32.09), (.JPY, 148.04), (.EUR, 0.908)])
-
+        let predicateEntity = ExchangeRateEntity.mockValue
         let sut = makeSUT(result: .success(predicateEntity))
 
         let result = await sut.exchangeRateList(with: baseCurrency)
