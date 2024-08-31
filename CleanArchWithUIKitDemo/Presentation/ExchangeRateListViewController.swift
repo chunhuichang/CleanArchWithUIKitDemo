@@ -43,13 +43,12 @@ extension ExchangeRateListViewController: UITableViewDataSource {
 
     public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "RateCell", for: indexPath)
-        let rate: (currency: String, rate: String) = if let row = viewModel.rateEntity?.rates[indexPath.row] {
-            (currency: row.currency.rawValue, rate: String(row.rate))
-        } else {
-            (currency: "", rate: "")
-        }
-        cell.textLabel?.text = rate.currency
-        cell.detailTextLabel?.text = rate.rate
+        let row = self.viewModel.rateEntity?.rates[indexPath.row]
+
+        var content = cell.defaultContentConfiguration()
+        content.text = row?.currencyText
+        content.secondaryText = row?.rateText
+        cell.contentConfiguration = content
         return cell
     }
 }
@@ -58,6 +57,7 @@ extension ExchangeRateListViewController: UITableViewDataSource {
 
 private extension ExchangeRateListViewController {
     func setupUI() {
+        self.view.backgroundColor = .white
         self.view.addSubview(self.tableView)
 
         let s = self.view.safeAreaLayoutGuide

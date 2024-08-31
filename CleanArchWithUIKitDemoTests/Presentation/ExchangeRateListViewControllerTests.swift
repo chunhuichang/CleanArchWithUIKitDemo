@@ -23,7 +23,12 @@ class ExchangeRateListViewControllerTests: XCTestCase {
         RunLoop.current.run(until: Date())
         let firstRow = sut.tableView.cellForRow(at: IndexPath(row: 0, section: 0))
 
-        XCTAssertEqual(firstRow?.textLabel?.text, entity.rates.first?.currency.rawValue)
+        guard let contentConfig = firstRow?.contentConfiguration as? UIListContentConfiguration else {
+            XCTFail("ContentConfiguration should be of type UIListContentConfiguration")
+            return
+        }
+        XCTAssertEqual(contentConfig.text, entity.rates.first?.currencyText)
+        XCTAssertEqual(contentConfig.secondaryText, entity.rates.first?.rateText)
     }
 }
 

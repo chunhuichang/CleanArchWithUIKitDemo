@@ -16,6 +16,14 @@ public struct ExchangeRateEntity {
             self.currency = currency
             self.rate = rate
         }
+
+        public var currencyText: String {
+            currency.rawValue
+        }
+
+        public var rateText: String {
+            String(rate)
+        }
     }
 
     public init(base: Currency, date: String, timeLastUpdated: Int, rates: [RateEntity]) {
@@ -41,6 +49,13 @@ extension ExchangeRateEntity: MockEntity {
     public typealias T = Self
     public static var mockValue: ExchangeRateEntity {
         ExchangeRateEntity(base: .USD, date: "2024-8-20", timeLastUpdated: Int(Date().timeIntervalSinceNow), rates: [ExchangeRateEntity.RateEntity(currency: .USD, rate: 1), ExchangeRateEntity.RateEntity(currency: .TWD, rate: 32.09), ExchangeRateEntity.RateEntity(currency: .JPY, rate: 148.04), ExchangeRateEntity.RateEntity(currency: .EUR, rate: 0.908)])
+    }
+}
+
+extension ExchangeRateEntity.RateEntity: MockEntity {
+    public typealias T = Self
+    public static var mockValue: ExchangeRateEntity.RateEntity {
+        ExchangeRateEntity.RateEntity(currency: .USD, rate: 1)
     }
 }
 
