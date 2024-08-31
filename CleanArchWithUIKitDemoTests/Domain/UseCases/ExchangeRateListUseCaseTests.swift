@@ -53,18 +53,6 @@ struct ExchangeRateListUseCaseTests {
 
 private extension ExchangeRateListUseCaseTests {
     func makeSUT(result: Result<ExchangeRateEntity, Error>) -> ExchangeRateListUseCase {
-        MainExchangeRateListUseCase(repository: MockRepository(result: result))
-    }
-}
-
-private struct MockRepository: ExchangeRateListRepository {
-    private let result: Result<ExchangeRateEntity, Error>
-
-    init(result: Result<ExchangeRateEntity, Error>) {
-        self.result = result
-    }
-
-    func exchangeRateList(with base: CleanArchWithUIKitDemo.Currency) async -> Result<ExchangeRateEntity, Error> {
-        result
+        MainExchangeRateListUseCase(repository: MockExchangeRateListRepository(result: result))
     }
 }
