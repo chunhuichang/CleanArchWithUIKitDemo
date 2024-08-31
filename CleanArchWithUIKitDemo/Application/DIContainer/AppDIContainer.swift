@@ -12,3 +12,12 @@ public final class AppDIContainer {
 
     let loadDataLoader = RemoteDataLoader(client: URLSessionHTTPClient())
 }
+
+// MARK: - DIContainers of scenes
+
+extension AppDIContainer {
+    func makeExchangeRateListDIContainer() -> ExchangeRateListDIContainer {
+        let dependencies = ExchangeRateListDIContainer.Dependencies(loadDataLoader: loadDataLoader)
+        return ExchangeRateListDIContainer(dependencies: dependencies)
+    }
+}

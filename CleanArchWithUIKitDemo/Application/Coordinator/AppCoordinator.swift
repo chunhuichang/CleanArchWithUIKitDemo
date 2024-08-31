@@ -17,6 +17,9 @@ public final class AppCoordinator: Coordinator {
     }
 
     public func start() {
-        // TODO: Create list coordinator
+        let diContainer = appDIContainer.makeExchangeRateListDIContainer()
+        let coordinator = diContainer.makeExchangeRateListCoordinator(navigationController: navigationController)
+        add(child: coordinator)
+        coordinator.start()
     }
 }
