@@ -10,6 +10,7 @@ import Foundation
 // Input
 public protocol ExchangeRateListVMInput {
     func viewDidLoad()
+    func didSelectRowAt(_ row: Int)
 }
 
 // Output
@@ -19,8 +20,13 @@ public protocol ExchangeRateListVMOutput {
     var alertMessage: (title: String, message: String)? { get }
 }
 
+public protocol ExchangeRateListViewModelDelegate: AnyObject {
+    func goToDetail(rate: ExchangeRateEntity.RateEntity)
+}
+
 public final class ExchangeRateListViewModel: ExchangeRateListVMOutput {
     private let usecase: ExchangeRateListUseCase
+    public weak var delegate: ExchangeRateListViewModelDelegate?
 
     public init(_ usecase: ExchangeRateListUseCase) {
         self.usecase = usecase
@@ -45,5 +51,12 @@ extension ExchangeRateListViewModel: ExchangeRateListVMInput {
                 alertMessage = (title: "Error", message: error.localizedDescription)
             }
         }
+    }
+
+    public func didSelectRowAt(_ row: Int) {
+        guard let rate = rateEntity?.rates[row] else {
+            return
+        }
+        delegate?.goToDetail(rate: rate)
     }
 }

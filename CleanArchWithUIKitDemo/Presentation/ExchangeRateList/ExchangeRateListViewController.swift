@@ -34,7 +34,11 @@ public final class ExchangeRateListViewController: UIViewController {
     }
 }
 
-extension ExchangeRateListViewController: UITableViewDelegate {}
+extension ExchangeRateListViewController: UITableViewDelegate {
+    public func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        self.viewModel.didSelectRowAt(indexPath.row)
+    }
+}
 
 extension ExchangeRateListViewController: UITableViewDataSource {
     public func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
