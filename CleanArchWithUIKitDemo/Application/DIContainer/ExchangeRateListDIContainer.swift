@@ -31,6 +31,7 @@ public final class ExchangeRateListDIContainer {
 /// make DIContainer or ViewController
 public protocol ExchangeRateListCoordinatorDependencies {
     func makeExchangeRateListViewController() -> UIViewController
+    func makeExchangeRateDetailDIContainer() -> ExchangeRateDetailDIContainer
 }
 
 extension ExchangeRateListDIContainer: ExchangeRateListCoordinatorDependencies {
@@ -48,5 +49,9 @@ extension ExchangeRateListDIContainer: ExchangeRateListCoordinatorDependencies {
 
         let view = ExchangeRateListViewController(viewModel: vm)
         return view
+    }
+
+    public func makeExchangeRateDetailDIContainer() -> ExchangeRateDetailDIContainer {
+        ExchangeRateDetailDIContainer()
     }
 }
