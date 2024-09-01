@@ -14,7 +14,7 @@ public protocol ExchangeRateDetailVMInput {
 
 // Output
 public protocol ExchangeRateDetailVMOutput {
-    var rateEntity: ExchangeRateEntity.RateEntity? { get }
+    var rateEntity: ExchangeRateEntity.RateEntity { get }
 }
 
 public protocol ExchangeRateDetailViewModelDelegate: AnyObject {
@@ -29,7 +29,7 @@ public final class ExchangeRateDetailViewModel: ExchangeRateDetailVMOutput {
     }
 
     // output
-    @Published public var rateEntity: ExchangeRateEntity.RateEntity? = nil
+    @Published public var rateEntity: ExchangeRateEntity.RateEntity
 }
 
 extension ExchangeRateDetailViewModel: ExchangeRateDetailVMInput {

@@ -13,7 +13,7 @@ public final class ExchangeRateListViewController: UIViewController {
 
     private var cancellables = Set<AnyCancellable>()
 
-    public lazy var tableView: UITableView = createTableView()
+    public private(set) lazy var tableView: UITableView = createTableView()
 
     public init(viewModel: ExchangeRateListViewModel) {
         self.viewModel = viewModel

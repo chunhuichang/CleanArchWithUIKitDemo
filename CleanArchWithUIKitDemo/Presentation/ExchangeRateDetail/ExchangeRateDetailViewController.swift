@@ -12,8 +12,8 @@ public final class ExchangeRateDetailViewController: UIViewController {
     public let viewModel: ExchangeRateDetailViewModel
     private var cancellables = Set<AnyCancellable>()
 
-    private lazy var currencyLabel: UILabel = createCurrencyLabel()
-    private lazy var rateLabel: UILabel = createRateLabel()
+    public private(set) lazy var currencyLabel: UILabel = createCurrencyLabel()
+    public private(set) lazy var rateLabel: UILabel = createRateLabel()
 
     public init(viewModel: ExchangeRateDetailViewModel) {
         self.viewModel = viewModel
@@ -80,8 +80,8 @@ private extension ExchangeRateDetailViewController {
         self.viewModel.$rateEntity
             .receive(on: DispatchQueue.main)
             .sink { [weak self] entity in
-                self?.currencyLabel.text = entity?.currencyText
-                self?.rateLabel.text = entity?.rateText
+                self?.currencyLabel.text = entity.currencyText
+                self?.rateLabel.text = entity.rateText
             }
             .store(in: &self.cancellables)
     }

@@ -12,13 +12,14 @@ import XCTest
 class ExchangeRateListViewControllerTests: XCTestCase {
     func test_hasData_displayTableView() {
         let (sut, _) = makeSUTWithSuccessResult()
-
+        RunLoop.current.run(until: Date())
         XCTAssertEqual(sut.tableView.numberOfSections, 1)
         XCTAssertEqual(sut.tableView.numberOfRows(inSection: 0), 4)
     }
 
     func test_hasData_cellConfig() {
         let (sut, entity) = makeSUTWithSuccessResult()
+        sut.tableView.reloadData()
         // Trigger the run loop to allow the table view to lay out its cells
         RunLoop.current.run(until: Date())
         let firstRow = sut.tableView.cellForRow(at: IndexPath(row: 0, section: 0))
