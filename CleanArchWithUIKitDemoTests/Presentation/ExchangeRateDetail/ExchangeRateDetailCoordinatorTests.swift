@@ -19,6 +19,25 @@ class ExchangeRateDetailCoordinatorTests: XCTestCase {
         XCTAssertEqual(mockNavigationController?.pushedViewControllers.count, 1, "Exactly one view controller should be pushed")
         XCTAssertTrue(mockNavigationController?.pushedViewControllers.first is ExchangeRateDetailViewController, "The first pushed view controller should be of type ExchangeRateListViewController")
     }
+
+    func test_trigger_dismiss() {
+        let sut = makeSUT()
+        let spy = SpyExchangeRateDetailCoordinatorDelegate()
+        sut.delegate = spy
+        sut.start()
+
+        let detailVC = (sut.navigationController as? MockNavigationController)?.pushedViewControllers.first as? ExchangeRateDetailViewController
+        detailVC?.viewModel.input.viewWillDisappear()
+
+        XCTAssertEqual(spy.dismissCallCount, 1)
+    }
+}
+
+private class SpyExchangeRateDetailCoordinatorDelegate: ExchangeRateDetailCoordinatorDelegate {
+    private(set) var dismissCallCount = 0
+    func dismiss(_: Coordinator) {
+        dismissCallCount += 1
+    }
 }
 
 private extension ExchangeRateDetailCoordinatorTests {

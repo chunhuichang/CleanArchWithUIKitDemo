@@ -9,13 +9,13 @@ import Combine
 import UIKit
 
 public final class ExchangeRateDetailViewController: UIViewController {
-    public let viewModel: ExchangeRateDetailViewModel
+    public let viewModel: ExchangeRateDetailVMManager
     private var cancellables = Set<AnyCancellable>()
 
     public private(set) lazy var currencyLabel: UILabel = createCurrencyLabel()
     public private(set) lazy var rateLabel: UILabel = createRateLabel()
 
-    public init(viewModel: ExchangeRateDetailViewModel) {
+    public init(viewModel: ExchangeRateDetailVMManager) {
         self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
     }
@@ -33,7 +33,7 @@ public final class ExchangeRateDetailViewController: UIViewController {
     }
 
     override public func viewWillDisappear(_ animated: Bool) {
-        self.viewModel.viewWillDisappear()
+        self.viewModel.input.viewWillDisappear()
     }
 }
 
@@ -77,11 +77,17 @@ private extension ExchangeRateDetailViewController {
 
 private extension ExchangeRateDetailViewController {
     func bindViewModel() {
-        self.viewModel.$rateEntity
+        self.viewModel.output.currencyTextPublished
             .receive(on: DispatchQueue.main)
-            .sink { [weak self] entity in
-                self?.currencyLabel.text = entity.currencyText
-                self?.rateLabel.text = entity.rateText
+            .sink { [weak self] label in
+                self?.currencyLabel.text = label
+            }
+            .store(in: &self.cancellables)
+
+        self.viewModel.output.rateTextPublished
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] label in
+                self?.rateLabel.text = label
             }
             .store(in: &self.cancellables)
     }
