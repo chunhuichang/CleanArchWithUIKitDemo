@@ -5,6 +5,7 @@
 //  Created by Jill Chang on 2024/8/22.
 //
 
+import Combine
 import Foundation
 
 // Input
@@ -15,16 +16,26 @@ public protocol ExchangeRateListVMInput {
 
 // Output
 public protocol ExchangeRateListVMOutput {
-    var rateEntity: ExchangeRateEntity? { get }
-    var isLoading: Bool { get }
-    var alertMessage: (title: String, message: String)? { get }
+    var rateEntityPublisher: Published<ExchangeRateEntity?>.Publisher { get }
+    var isLoadingPublisher: Published<Bool>.Publisher { get }
+    var alertMessagePublisher: Published<(title: String, message: String)?>.Publisher { get }
+
+    func numberOfRowsInSection(_ section: Int) -> Int
+    func cellForRowAt(_ indexPath: IndexPath) -> ExchangeRateEntity.RateEntity?
+}
+
+// Manager
+public protocol ExchangeRateListVMManager: AnyObject {
+    var delegate: ExchangeRateListViewModelDelegate? { get set }
+    var input: ExchangeRateListVMInput { get }
+    var output: ExchangeRateListVMOutput { get }
 }
 
 public protocol ExchangeRateListViewModelDelegate: AnyObject {
     func goToDetail(rate: ExchangeRateEntity.RateEntity)
 }
 
-public final class ExchangeRateListViewModel: ExchangeRateListVMOutput {
+public final class ExchangeRateListViewModel: ExchangeRateListVMManager, ExchangeRateListVMOutput {
     private let usecase: ExchangeRateListUseCase
     public weak var delegate: ExchangeRateListViewModelDelegate?
 
@@ -32,11 +43,45 @@ public final class ExchangeRateListViewModel: ExchangeRateListVMOutput {
         self.usecase = usecase
     }
 
-    // output
-    @Published public var rateEntity: ExchangeRateEntity? = nil
-    @Published public var isLoading: Bool = false
-    @Published public var alertMessage: (title: String, message: String)? = nil
+    public var input: ExchangeRateListVMInput {
+        self
+    }
+
+    public var output: ExchangeRateListVMOutput {
+        self
+    }
+
+    @Published private var rateEntity: ExchangeRateEntity? = nil
+    @Published private var isLoading: Bool = false
+    @Published private var alertMessage: (title: String, message: String)? = nil
+
+    // Output
+    public var rateEntityPublisher: Published<ExchangeRateEntity?>.Publisher {
+        $rateEntity
+    }
+
+    public var isLoadingPublisher: Published<Bool>.Publisher {
+        $isLoading
+    }
+
+    public var alertMessagePublisher: Published<(title: String, message: String)?>.Publisher {
+        $alertMessage
+    }
 }
+
+// MARK: - Output
+
+public extension ExchangeRateListViewModel {
+    func numberOfRowsInSection(_ section: Int) -> Int {
+        rateEntity?.rates.count ?? 0
+    }
+
+    func cellForRowAt(_ indexPath: IndexPath) -> ExchangeRateEntity.RateEntity? {
+        rateEntity?.rates[indexPath.row]
+    }
+}
+
+// MARK: - Input
 
 extension ExchangeRateListViewModel: ExchangeRateListVMInput {
     public func viewDidLoad() {

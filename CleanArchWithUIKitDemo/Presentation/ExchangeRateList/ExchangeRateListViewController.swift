@@ -9,13 +9,13 @@ import Combine
 import UIKit
 
 public final class ExchangeRateListViewController: UIViewController {
-    public let viewModel: ExchangeRateListViewModel
+    public let viewModel: ExchangeRateListVMManager
 
     private var cancellables = Set<AnyCancellable>()
 
     public private(set) lazy var tableView: UITableView = createTableView()
 
-    public init(viewModel: ExchangeRateListViewModel) {
+    public init(viewModel: ExchangeRateListVMManager) {
         self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
     }
@@ -30,24 +30,24 @@ public final class ExchangeRateListViewController: UIViewController {
 
         self.setupUI()
         self.bindViewModel()
-        self.viewModel.viewDidLoad()
+        self.viewModel.input.viewDidLoad()
     }
 }
 
 extension ExchangeRateListViewController: UITableViewDelegate {
     public func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        self.viewModel.didSelectRowAt(indexPath.row)
+        self.viewModel.input.didSelectRowAt(indexPath.row)
     }
 }
 
 extension ExchangeRateListViewController: UITableViewDataSource {
     public func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        self.viewModel.rateEntity?.rates.count ?? 0
+        self.viewModel.output.numberOfRowsInSection(section)
     }
 
     public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "RateCell", for: indexPath)
-        let row = self.viewModel.rateEntity?.rates[indexPath.row]
+        let row = self.viewModel.output.cellForRowAt(indexPath)
 
         var content = cell.defaultContentConfiguration()
         content.text = row?.currencyText
@@ -95,14 +95,14 @@ private extension ExchangeRateListViewController {
 
 private extension ExchangeRateListViewController {
     func bindViewModel() {
-        self.viewModel.$rateEntity
+        self.viewModel.output.rateEntityPublisher
             .receive(on: DispatchQueue.main)
             .sink { [weak self] _ in
                 self?.tableView.reloadData()
             }
             .store(in: &self.cancellables)
 
-        self.viewModel.$alertMessage
+        self.viewModel.output.alertMessagePublisher
             .compactMap { $0 }
             .sink { [weak self] msg in
                 self?.showErrorAlert(title: msg.title, message: msg.message)

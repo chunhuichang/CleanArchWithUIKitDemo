@@ -30,6 +30,21 @@ class ExchangeRateListCoordinatorTests: XCTestCase {
         let mockNavigationController = detailCoordinator?.navigationController as? MockNavigationController
         XCTAssertTrue(mockNavigationController?.pushedViewControllers.first is ExchangeRateDetailViewController, "The first pushed view controller should be of type ExchangeRateDetailViewController")
     }
+
+    func test_dismiss_triggerRemoveCoordinator() {
+        let sut = makeSUT()
+
+        sut.goToDetail(rate: ExchangeRateEntity.RateEntity.mockValue)
+        XCTAssertEqual(sut.childCoordinators.count, 1, "Exactly one child coordinator should be haved")
+
+        guard let detailCoordinator = sut.childCoordinators.first as? ExchangeRateDetailCoordinator else {
+            XCTFail("Coordinator should be of type ExchangeRateDetailCoordinator")
+            return
+        }
+        detailCoordinator.dismiss()
+
+        XCTAssertEqual(sut.childCoordinators.count, 0)
+    }
 }
 
 private extension ExchangeRateListCoordinatorTests {

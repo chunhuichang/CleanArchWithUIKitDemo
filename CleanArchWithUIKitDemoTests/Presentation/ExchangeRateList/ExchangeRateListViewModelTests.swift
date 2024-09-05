@@ -16,7 +16,7 @@ class ExchangeRateListViewModelTests: XCTestCase {
 
         let exp = expectation(description: "Wait for ExchangeRateList")
 
-        sut.$alertMessage
+        sut.alertMessagePublisher
             .dropFirst()
             .sink { message in
                 XCTAssertNotNil(message)
@@ -36,7 +36,7 @@ class ExchangeRateListViewModelTests: XCTestCase {
 
         let exp = expectation(description: "Wait for ExchangeRateList")
 
-        sut.$rateEntity
+        sut.rateEntityPublisher
             .dropFirst()
             .sink(receiveCompletion: { _ in
                 XCTFail("Expected success, got \(predicateEntity) instead")
@@ -70,7 +70,7 @@ private struct MockUseCase: ExchangeRateListUseCase {
         self.result = result
     }
 
-    func exchangeRateList(with base: Currency) async -> Result<ExchangeRateEntity, any Error> {
+    func exchangeRateList(with _: Currency) async -> Result<ExchangeRateEntity, any Error> {
         result
     }
 }

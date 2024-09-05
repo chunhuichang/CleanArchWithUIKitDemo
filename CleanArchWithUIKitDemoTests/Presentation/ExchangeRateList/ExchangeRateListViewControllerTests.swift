@@ -44,7 +44,7 @@ private extension ExchangeRateListViewControllerTests {
         return vc
     }
 
-    func makeSUTWithSuccessResult(file: StaticString = #filePath, line: UInt = #line) -> (viewController: ExchangeRateListViewController, entity: ExchangeRateEntity) {
+    func makeSUTWithSuccessResult(file _: StaticString = #filePath, line _: UInt = #line) -> (viewController: ExchangeRateListViewController, entity: ExchangeRateEntity) {
         let predicateEntity = ExchangeRateEntity.mockValue
         return (makeSUT(result: .success(predicateEntity)), predicateEntity)
     }
@@ -57,7 +57,7 @@ private struct MockUseCase: ExchangeRateListUseCase {
         self.result = result
     }
 
-    func exchangeRateList(with base: Currency) async -> Result<ExchangeRateEntity, any Error> {
+    func exchangeRateList(with _: Currency) async -> Result<ExchangeRateEntity, any Error> {
         result
     }
 }
