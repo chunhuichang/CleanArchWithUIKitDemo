@@ -31,8 +31,7 @@ struct ExchangeRateListUseCaseTests {
     @Test
     func exchangeRate_deliversEntityOnSuccess() async {
         let baseCurrency = Currency.USD
-        let predicateEntity = ExchangeRateEntity(base: baseCurrency, date: "2024-8-20", timeLastUpdated: Int(Date().timeIntervalSinceNow), rates: [(.USD, 1), (.TWD, 32.09), (.JPY, 148.04), (.EUR, 0.908)])
-
+        let predicateEntity = ExchangeRateEntity.mockValue
         let sut = makeSUT(result: .success(predicateEntity))
 
         let result = await sut.exchangeRateList(with: baseCurrency)
@@ -54,18 +53,6 @@ struct ExchangeRateListUseCaseTests {
 
 private extension ExchangeRateListUseCaseTests {
     func makeSUT(result: Result<ExchangeRateEntity, Error>) -> ExchangeRateListUseCase {
-        MainExchangeRateListUseCase(repository: MockRepository(result: result))
-    }
-}
-
-private struct MockRepository: ExchangeRateListRepository {
-    private let result: Result<ExchangeRateEntity, Error>
-
-    init(result: Result<ExchangeRateEntity, Error>) {
-        self.result = result
-    }
-
-    func exchangeRateList(with base: CleanArchWithUIKitDemo.Currency) async -> Result<ExchangeRateEntity, Error> {
-        result
+        MainExchangeRateListUseCase(repository: MockExchangeRateListRepository(result: result))
     }
 }

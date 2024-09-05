@@ -12,18 +12,24 @@ import XCTest
 class ExchangeRateListViewControllerTests: XCTestCase {
     func test_hasData_displayTableView() {
         let (sut, _) = makeSUTWithSuccessResult()
-
+        RunLoop.current.run(until: Date())
         XCTAssertEqual(sut.tableView.numberOfSections, 1)
         XCTAssertEqual(sut.tableView.numberOfRows(inSection: 0), 4)
     }
 
     func test_hasData_cellConfig() {
         let (sut, entity) = makeSUTWithSuccessResult()
+        sut.tableView.reloadData()
         // Trigger the run loop to allow the table view to lay out its cells
         RunLoop.current.run(until: Date())
         let firstRow = sut.tableView.cellForRow(at: IndexPath(row: 0, section: 0))
 
-        XCTAssertEqual(firstRow?.textLabel?.text, entity.rates.first?.currency.rawValue)
+        guard let contentConfig = firstRow?.contentConfiguration as? UIListContentConfiguration else {
+            XCTFail("ContentConfiguration should be of type UIListContentConfiguration")
+            return
+        }
+        XCTAssertEqual(contentConfig.text, entity.rates.first?.currencyText)
+        XCTAssertEqual(contentConfig.secondaryText, entity.rates.first?.rateText)
     }
 }
 
@@ -38,8 +44,8 @@ private extension ExchangeRateListViewControllerTests {
         return vc
     }
 
-    func makeSUTWithSuccessResult(file: StaticString = #filePath, line: UInt = #line) -> (viewController: ExchangeRateListViewController, entity: ExchangeRateEntity) {
-        let predicateEntity = ExchangeRateEntity(base: .USD, date: "2024-8-20", timeLastUpdated: Int(Date().timeIntervalSinceNow), rates: [(.USD, 1), (.TWD, 32.09), (.JPY, 148.04), (.EUR, 0.908)])
+    func makeSUTWithSuccessResult(file _: StaticString = #filePath, line _: UInt = #line) -> (viewController: ExchangeRateListViewController, entity: ExchangeRateEntity) {
+        let predicateEntity = ExchangeRateEntity.mockValue
         return (makeSUT(result: .success(predicateEntity)), predicateEntity)
     }
 }
@@ -51,7 +57,7 @@ private struct MockUseCase: ExchangeRateListUseCase {
         self.result = result
     }
 
-    func exchangeRateList(with base: Currency) async -> Result<ExchangeRateEntity, any Error> {
+    func exchangeRateList(with _: Currency) async -> Result<ExchangeRateEntity, any Error> {
         result
     }
 }

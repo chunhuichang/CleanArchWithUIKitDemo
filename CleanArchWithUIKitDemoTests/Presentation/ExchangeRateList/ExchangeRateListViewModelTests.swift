@@ -16,7 +16,7 @@ class ExchangeRateListViewModelTests: XCTestCase {
 
         let exp = expectation(description: "Wait for ExchangeRateList")
 
-        sut.$alertMessage
+        sut.alertMessagePublisher
             .dropFirst()
             .sink { message in
                 XCTAssertNotNil(message)
@@ -31,12 +31,12 @@ class ExchangeRateListViewModelTests: XCTestCase {
 
     func test_correctDataTrigger_successExchangeRateListGetEntity() async {
         let baseCurrency = Currency.USD
-        let predicateEntity = ExchangeRateEntity(base: baseCurrency, date: "2024-8-20", timeLastUpdated: Int(Date().timeIntervalSinceNow), rates: [(.USD, 1), (.TWD, 32.09), (.JPY, 148.04), (.EUR, 0.908)])
+        let predicateEntity = ExchangeRateEntity.mockValue
         var (sut, cancellable) = makeSUT(result: .success(predicateEntity))
 
         let exp = expectation(description: "Wait for ExchangeRateList")
 
-        sut.$rateEntity
+        sut.rateEntityPublisher
             .dropFirst()
             .sink(receiveCompletion: { _ in
                 XCTFail("Expected success, got \(predicateEntity) instead")
@@ -70,7 +70,7 @@ private struct MockUseCase: ExchangeRateListUseCase {
         self.result = result
     }
 
-    func exchangeRateList(with base: Currency) async -> Result<ExchangeRateEntity, any Error> {
+    func exchangeRateList(with _: Currency) async -> Result<ExchangeRateEntity, any Error> {
         result
     }
 }
