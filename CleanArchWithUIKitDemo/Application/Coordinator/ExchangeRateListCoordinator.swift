@@ -18,11 +18,7 @@ public final class ExchangeRateListCoordinator: Coordinator {
     }
 
     public func start() {
-        guard let vc = dependencies.makeExchangeRateListViewController() as? ExchangeRateListViewController else {
-            fatalError("Casting to ViewController fail")
-        }
-        vc.viewModel.delegate = self
-        self.navigationController.pushViewController(vc, animated: false)
+        self.navigationController.pushViewController(makeExchangeRateListViewController(), animated: false)
     }
 }
 
@@ -39,5 +35,19 @@ extension ExchangeRateListCoordinator: ExchangeRateListViewModelDelegate {
 extension ExchangeRateListCoordinator: ExchangeRateDetailCoordinatorDelegate {
     public func dismiss(_ coordinator: Coordinator) {
         remove(child: coordinator)
+    }
+}
+
+private extension ExchangeRateListCoordinator {
+    func makeExchangeRateListViewController() -> UIViewController {
+        guard let vc = dependencies.makeExchangeRateListViewController() as? ExchangeRateListViewController else {
+            fatalError("Casting to ViewController fail")
+        }
+        vc.viewModel.delegate = self
+        return vc
+    }
+
+    func makeExchangeRateListView() -> UIViewController {
+        self.dependencies.makeExchangeRateListView()
     }
 }
