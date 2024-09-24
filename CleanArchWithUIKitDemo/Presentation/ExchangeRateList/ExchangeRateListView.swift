@@ -8,10 +8,10 @@
 import SwiftUI
 
 struct ExchangeRateListView: View {
-    @ObservedObject var viewModel: ListViewModel
+    @ObservedObject var viewModel: ExchangeRateListViewModel
 
     var body: some View {
-        List(viewModel.items) { item in
+        List(viewModel.rateEntity?.rates ?? []) { item in
             VStack(alignment: .leading, spacing: 3) {
                 Text(item.currencyText)
                     .foregroundColor(.primary)
@@ -23,34 +23,12 @@ struct ExchangeRateListView: View {
                 .font(.subheadline)
             }
         }
+        .onAppear {
+            viewModel.input.viewDidLoad()
+        }
     }
 }
 
 #Preview {
-    ExchangeRateListView(viewModel: ListViewModel(usecase: MockExchangeRateListUseCase()))
-}
-
-import Combine
-
-class ListViewModel: ObservableObject {
-    @Published var items: [ExchangeRateEntity.RateEntity] = []
-    private let usecase: ExchangeRateListUseCase
-
-    init(usecase: ExchangeRateListUseCase) {
-        self.usecase = usecase
-        fetchItems()
-    }
-
-    func fetchItems() {
-        Task {
-            let result = await usecase.exchangeRateList(with: .USD)
-            switch result {
-            case .success(let entity):
-                items = entity.rates
-            case .failure(let error):
-                // TODO: implement error
-                print("Error: \(error)")
-            }
-        }
-    }
+    ExchangeRateListView(viewModel: ExchangeRateListViewModel(MockExchangeRateListUseCase()))
 }

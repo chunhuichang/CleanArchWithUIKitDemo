@@ -35,7 +35,7 @@ public protocol ExchangeRateListViewModelDelegate: AnyObject {
     func goToDetail(rate: ExchangeRateEntity.RateEntity)
 }
 
-public final class ExchangeRateListViewModel: ExchangeRateListVMManager, ExchangeRateListVMOutput {
+public final class ExchangeRateListViewModel: ObservableObject, ExchangeRateListVMManager, ExchangeRateListVMOutput {
     private let usecase: ExchangeRateListUseCase
     public weak var delegate: ExchangeRateListViewModelDelegate?
 
@@ -51,9 +51,9 @@ public final class ExchangeRateListViewModel: ExchangeRateListVMManager, Exchang
         self
     }
 
-    @Published private var rateEntity: ExchangeRateEntity? = nil
-    @Published private var isLoading: Bool = false
-    @Published private var alertMessage: (title: String, message: String)? = nil
+    @Published private(set) var rateEntity: ExchangeRateEntity? = nil
+    @Published private(set) var isLoading: Bool = false
+    @Published private(set) var alertMessage: (title: String, message: String)? = nil
 
     // Output
     public var rateEntityPublisher: Published<ExchangeRateEntity?>.Publisher {
@@ -86,14 +86,22 @@ public extension ExchangeRateListViewModel {
 extension ExchangeRateListViewModel: ExchangeRateListVMInput {
     public func viewDidLoad() {
         Task {
-            isLoading = true
+            await MainActor.run {
+                isLoading = true
+            }
             let result = await usecase.exchangeRateList(with: .USD)
-            isLoading = false
+            await MainActor.run {
+                isLoading = false
+            }
             switch result {
             case .success(let entity):
-                rateEntity = entity
+                await MainActor.run {
+                    self.rateEntity = entity
+                }
             case .failure(let error):
-                alertMessage = (title: "Error", message: error.localizedDescription)
+                await MainActor.run {
+                    alertMessage = (title: "Error", message: error.localizedDescription)
+                }
             }
         }
     }

@@ -47,7 +47,7 @@ extension ExchangeRateListDIContainer: ExchangeRateListCoordinatorDependencies {
         let usecase = MainExchangeRateListUseCase(repository: repository)
 
         // Presentation layer
-        let vm = ListViewModel(usecase: usecase)
+        let vm = ExchangeRateListViewModel(usecase)
 
         let view = ExchangeRateListView(viewModel: vm)
 
