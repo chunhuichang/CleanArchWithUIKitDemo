@@ -8,11 +8,13 @@
 import Foundation
 
 public struct ExchangeRateEntity {
-    public struct RateEntity {
+    public struct RateEntity: Identifiable {
+        public let id: String
         public let currency: Currency
         public let rate: Double
 
         public init(currency: Currency, rate: Double) {
+            self.id = UUID().uuidString
             self.currency = currency
             self.rate = rate
         }

@@ -1,15 +1,15 @@
 //
-//  ExchangeRateListMockRepository.swift
+//  MockExchangeRateListUseCase.swift
 //  CleanArchWithUIKitDemo
 //
-//  Created by Jill Chang on 2024/8/31.
+//  Created by Jill Chang on 2024/9/24.
 //
 
 import Foundation
 
-public struct MockExchangeRateListRepository: ExchangeRateListRepository {
+public struct MockExchangeRateListUseCase: ExchangeRateListUseCase {
     private let result: Result<ExchangeRateEntity, Error>
-    
+
     public init(result: Result<ExchangeRateEntity, Error> = .success(ExchangeRateEntity.mockValue)) {
         self.result = result
     }

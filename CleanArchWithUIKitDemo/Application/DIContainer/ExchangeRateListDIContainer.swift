@@ -5,6 +5,7 @@
 //  Created by Jill Chang on 2024/8/26.
 //
 
+import SwiftUI
 import UIKit
 
 public final class ExchangeRateListDIContainer {
@@ -31,10 +32,28 @@ public final class ExchangeRateListDIContainer {
 /// make DIContainer or ViewController
 public protocol ExchangeRateListCoordinatorDependencies {
     func makeExchangeRateListViewController() -> UIViewController
+    func makeExchangeRateListView() -> UIViewController
     func makeExchangeRateDetailDIContainer() -> ExchangeRateDetailDIContainer
 }
 
 extension ExchangeRateListDIContainer: ExchangeRateListCoordinatorDependencies {
+    public func makeExchangeRateListView() -> UIViewController {
+        // Data layer
+        let repository = MainExchangeRateListRepository(loadDataLoader: dependencies.loadDataLoader)
+        // Mock
+        // let repository = MockExchangeRateListRepository()
+
+        // Domain layer
+        let usecase = MainExchangeRateListUseCase(repository: repository)
+
+        // Presentation layer
+        let vm = ExchangeRateListViewModel(usecase)
+
+        let view = ExchangeRateListView(viewModel: vm)
+
+        return UIHostingController(rootView: view)
+    }
+
     public func makeExchangeRateListViewController() -> UIViewController {
         // Data layer
         let repository = MainExchangeRateListRepository(loadDataLoader: dependencies.loadDataLoader)
