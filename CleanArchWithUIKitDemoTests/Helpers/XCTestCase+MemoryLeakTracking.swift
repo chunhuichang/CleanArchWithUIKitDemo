@@ -14,3 +14,12 @@ extension XCTestCase {
         }
     }
 }
+
+extension XCTestCase {
+    func makeNewWindow(view: UIView) -> UIWindow {
+        let window = UIWindow()
+        window.addSubview(view) // Add the view to the window's view hierarchy
+        window.makeKeyAndVisible() // Make sure it's visible and added to the window
+        return window
+    }
+}

@@ -14,9 +14,18 @@ class ExchangeRateDetailViewControllerTests: XCTestCase {
         let entity = ExchangeRateEntity.RateEntity.mockValue
         let (sut, _) = makeSUT(entity: entity)
 
-        RunLoop.current.run(until: Date())
-        XCTAssertEqual(sut.currencyLabel.text, entity.currencyText)
-        XCTAssertEqual(sut.rateLabel.text, entity.rateText)
+        let expectation = expectation(description: "View load should complete")
+
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.05) {
+            expectation.fulfill()
+        }
+
+        waitForExpectations(timeout: 1.0) { error in
+            XCTAssertNil(error, "Test timed out")
+
+            XCTAssertEqual(sut.currencyLabel.text, entity.currencyText)
+            XCTAssertEqual(sut.rateLabel.text, entity.rateText)
+        }
     }
 
     func test_viewWillDisappear_inputTrigger() {
@@ -24,7 +33,18 @@ class ExchangeRateDetailViewControllerTests: XCTestCase {
         let (sut, spyVM) = makeSUT(entity: entity)
 
         sut.viewWillDisappear(false)
-        XCTAssertEqual(spyVM.viewWillDisappearCalledCount, 1)
+
+        let expectation = expectation(description: "View load should complete")
+
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.05) {
+            expectation.fulfill()
+        }
+
+        waitForExpectations(timeout: 1.0) { error in
+            XCTAssertNil(error, "Test timed out")
+
+            XCTAssertEqual(spyVM.viewWillDisappearCalledCount, 1)
+        }
     }
 }
 
@@ -32,9 +52,10 @@ private extension ExchangeRateDetailViewControllerTests {
     func makeSUT(entity: ExchangeRateEntity.RateEntity, file: StaticString = #filePath, line: UInt = #line) -> (ExchangeRateDetailViewController, SpyExchangeRateDetailVMManager) {
         let vm = SpyExchangeRateDetailVMManager(entity)
         let vc = ExchangeRateDetailViewController(viewModel: vm)
-        trackForMemoryLeaks(vm)
-        trackForMemoryLeaks(vc)
+        trackForMemoryLeaks(vm, file: file, line: line)
+        trackForMemoryLeaks(vc, file: file, line: line)
         vc.triggerLifecycleIfNeeded()
+        _ = makeNewWindow(view: vc.view)
         return (vc, vm)
     }
 }
