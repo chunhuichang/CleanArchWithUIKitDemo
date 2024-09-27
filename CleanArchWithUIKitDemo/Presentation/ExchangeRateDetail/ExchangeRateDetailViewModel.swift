@@ -30,11 +30,11 @@ public protocol ExchangeRateDetailViewModelDelegate: AnyObject {
     func dismiss()
 }
 
-public final class ExchangeRateDetailViewModel: ExchangeRateDetailVMManager, ExchangeRateDetailVMOutput {
+public final class ExchangeRateDetailViewModel: ObservableObject, ExchangeRateDetailVMManager, ExchangeRateDetailVMOutput {
     public weak var delegate: ExchangeRateDetailViewModelDelegate?
 
-    @Published private var currencyText: String
-    @Published private var rateText: String
+    @Published private(set) var currencyText: String
+    @Published private(set) var rateText: String
 
     public init(param: ExchangeRateDetailCoordinator.Params) {
         currencyText = param.rateEntity.currencyText
