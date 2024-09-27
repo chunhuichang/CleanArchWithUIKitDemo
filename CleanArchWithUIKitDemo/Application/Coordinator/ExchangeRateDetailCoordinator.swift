@@ -32,16 +32,26 @@ public final class ExchangeRateDetailCoordinator: Coordinator {
     }
 
     public func start() {
-        guard let vc = dependencies.makeExchangeRateDetailViewController(param: param) as? ExchangeRateDetailViewController else {
-            fatalError("Casting to ViewController fail")
-        }
-        vc.viewModel.delegate = self
-        navigationController.pushViewController(vc, animated: false)
+        navigationController.pushViewController(makeExchangeRateDetailViewController(), animated: false)
     }
 }
 
 extension ExchangeRateDetailCoordinator: ExchangeRateDetailViewModelDelegate {
     public func dismiss() {
         delegate?.dismiss(self)
+    }
+}
+
+private extension ExchangeRateDetailCoordinator {
+    func makeExchangeRateDetailViewController() -> UIViewController {
+        guard let vc = dependencies.makeExchangeRateDetailViewController(param: param) as? ExchangeRateDetailViewController else {
+            fatalError("Casting to ViewController fail")
+        }
+        vc.viewModel.delegate = self
+        return vc
+    }
+
+    func makeExchangeRateDetailView() -> UIViewController {
+        dependencies.makeExchangeRateDetailView(param: param)
     }
 }
