@@ -32,7 +32,7 @@ public final class ExchangeRateDetailCoordinator: Coordinator {
     }
 
     public func start() {
-        navigationController.pushViewController(makeExchangeRateDetailViewController(), animated: false)
+        navigationController.pushViewController(makeExchangeRateDetailView(), animated: false)
     }
 }
 
@@ -44,14 +44,10 @@ extension ExchangeRateDetailCoordinator: ExchangeRateDetailViewModelDelegate {
 
 private extension ExchangeRateDetailCoordinator {
     func makeExchangeRateDetailViewController() -> UIViewController {
-        guard let vc = dependencies.makeExchangeRateDetailViewController(param: param) as? ExchangeRateDetailViewController else {
-            fatalError("Casting to ViewController fail")
-        }
-        vc.viewModel.delegate = self
-        return vc
+        dependencies.makeExchangeRateDetailViewController(param: param, delegate: self)
     }
 
     func makeExchangeRateDetailView() -> UIViewController {
-        dependencies.makeExchangeRateDetailView(param: param)
+        dependencies.makeExchangeRateDetailView(param: param, delegate: self)
     }
 }

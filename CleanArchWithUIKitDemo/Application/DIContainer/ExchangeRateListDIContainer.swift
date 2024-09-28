@@ -31,13 +31,13 @@ public final class ExchangeRateListDIContainer {
 
 /// make DIContainer or ViewController
 public protocol ExchangeRateListCoordinatorDependencies {
-    func makeExchangeRateListViewController() -> UIViewController
-    func makeExchangeRateListView() -> UIViewController
+    func makeExchangeRateListViewController(delegate: ExchangeRateListViewModelDelegate?) -> UIViewController
+    func makeExchangeRateListView(delegate: ExchangeRateListViewModelDelegate?) -> UIViewController
     func makeExchangeRateDetailDIContainer() -> ExchangeRateDetailDIContainer
 }
 
 extension ExchangeRateListDIContainer: ExchangeRateListCoordinatorDependencies {
-    public func makeExchangeRateListView() -> UIViewController {
+    public func makeExchangeRateListView(delegate: ExchangeRateListViewModelDelegate?) -> UIViewController {
         // Data layer
         let repository = MainExchangeRateListRepository(loadDataLoader: dependencies.loadDataLoader)
         // Mock
@@ -48,13 +48,14 @@ extension ExchangeRateListDIContainer: ExchangeRateListCoordinatorDependencies {
 
         // Presentation layer
         let vm = ExchangeRateListViewModel(usecase)
+        vm.delegate = delegate
 
         let view = ExchangeRateListView(viewModel: vm)
 
         return UIHostingController(rootView: view)
     }
 
-    public func makeExchangeRateListViewController() -> UIViewController {
+    public func makeExchangeRateListViewController(delegate: ExchangeRateListViewModelDelegate?) -> UIViewController {
         // Data layer
         let repository = MainExchangeRateListRepository(loadDataLoader: dependencies.loadDataLoader)
         // Mock
@@ -65,6 +66,7 @@ extension ExchangeRateListDIContainer: ExchangeRateListCoordinatorDependencies {
 
         // Presentation layer
         let vm = ExchangeRateListViewModel(usecase)
+        vm.delegate = delegate
 
         let view = ExchangeRateListViewController(viewModel: vm)
         return view

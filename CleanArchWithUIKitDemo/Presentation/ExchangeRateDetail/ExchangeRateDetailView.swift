@@ -21,6 +21,9 @@ struct ExchangeRateDetailView: View {
                 .foregroundStyle(.tint.opacity(0.7))
             Spacer()
         }
+        .onDisappear {
+            viewModel.input.viewWillDisappear()
+        }
     }
 }
 

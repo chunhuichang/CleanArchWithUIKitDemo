@@ -40,14 +40,10 @@ extension ExchangeRateListCoordinator: ExchangeRateDetailCoordinatorDelegate {
 
 private extension ExchangeRateListCoordinator {
     func makeExchangeRateListViewController() -> UIViewController {
-        guard let vc = dependencies.makeExchangeRateListViewController() as? ExchangeRateListViewController else {
-            fatalError("Casting to ViewController fail")
-        }
-        vc.viewModel.delegate = self
-        return vc
+        self.dependencies.makeExchangeRateListViewController(delegate: self)
     }
 
     func makeExchangeRateListView() -> UIViewController {
-        self.dependencies.makeExchangeRateListView()
+        self.dependencies.makeExchangeRateListView(delegate: self)
     }
 }

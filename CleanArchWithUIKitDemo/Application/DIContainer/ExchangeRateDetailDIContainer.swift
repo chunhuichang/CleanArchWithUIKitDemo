@@ -17,21 +17,23 @@ public final class ExchangeRateDetailDIContainer {
 }
 
 public protocol ExchangeRateDetailCoordinatorDependencies: AnyObject {
-    func makeExchangeRateDetailViewController(param: ExchangeRateDetailCoordinator.Params) -> UIViewController
-    func makeExchangeRateDetailView(param: ExchangeRateDetailCoordinator.Params) -> UIViewController
+    func makeExchangeRateDetailViewController(param: ExchangeRateDetailCoordinator.Params, delegate: ExchangeRateDetailViewModelDelegate?) -> UIViewController
+    func makeExchangeRateDetailView(param: ExchangeRateDetailCoordinator.Params, delegate: ExchangeRateDetailViewModelDelegate?) -> UIViewController
 }
 
 extension ExchangeRateDetailDIContainer: ExchangeRateDetailCoordinatorDependencies {
-    public func makeExchangeRateDetailViewController(param: ExchangeRateDetailCoordinator.Params) -> UIViewController {
+    public func makeExchangeRateDetailViewController(param: ExchangeRateDetailCoordinator.Params, delegate: ExchangeRateDetailViewModelDelegate?) -> UIViewController {
         // VM
         let viewModel = ExchangeRateDetailViewModel(param: param)
+        viewModel.delegate = delegate
         // VC
         return ExchangeRateDetailViewController(viewModel: viewModel)
     }
 
-    public func makeExchangeRateDetailView(param: ExchangeRateDetailCoordinator.Params) -> UIViewController {
+    public func makeExchangeRateDetailView(param: ExchangeRateDetailCoordinator.Params, delegate: ExchangeRateDetailViewModelDelegate?) -> UIViewController {
         // VM
         let viewModel = ExchangeRateDetailViewModel(param: param)
+        viewModel.delegate = delegate
         // VC
         let view = ExchangeRateDetailView(viewModel: viewModel)
 
