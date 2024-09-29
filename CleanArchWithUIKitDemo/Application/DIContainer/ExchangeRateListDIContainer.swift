@@ -17,15 +17,17 @@ public final class ExchangeRateListDIContainer {
     }
 
     private let dependencies: Dependencies
+    private let view: PresentationView
 
-    public init(dependencies: Dependencies) {
+    public init(dependencies: Dependencies, view: PresentationView) {
         self.dependencies = dependencies
+        self.view = view
     }
 
     // MARK: - Flow Coordinators
 
     public func makeExchangeRateListCoordinator(navigationController: UINavigationController) -> ExchangeRateListCoordinator {
-        ExchangeRateListCoordinator(navigationController: navigationController, dependencies: self)
+        ExchangeRateListCoordinator(navigationController: navigationController, dependencies: self, param: ExchangeRateListCoordinator.Params(view: view))
     }
 }
 

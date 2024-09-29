@@ -7,10 +7,10 @@
 
 import SwiftUI
 
-struct ExchangeRateListView: View {
+public struct ExchangeRateListView: View {
     @ObservedObject var viewModel: ExchangeRateListViewModel
 
-    var body: some View {
+    public var body: some View {
         List(viewModel.rateEntity?.rates ?? []) { item in
             HStack {
                 VStack(alignment: .leading) {
