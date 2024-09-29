@@ -23,3 +23,8 @@ public extension Coordinator {
         childCoordinators = childCoordinators.filter { $0 !== child }
     }
 }
+
+public enum PresentationView: CaseIterable {
+    case UIKit
+    case SwiftUI
+}

@@ -12,7 +12,7 @@ import XCTest
 class ExchangeRateDetailViewModelTests: XCTestCase {
     func test_output_currencyLabel() async {
         let predicateEntity = ExchangeRateEntity.RateEntity.mockValue
-        var (sut, cancellable) = makeSUT(param: ExchangeRateDetailCoordinator.Params(rateEntity: predicateEntity))
+        var (sut, cancellable) = makeSUT(param: ExchangeRateDetailCoordinator.Params(rateEntity: predicateEntity, view: .UIKit))
 
         let exp = expectation(description: "Wait for ExchangeRate Currency")
         sut.output.currencyTextPublished
@@ -26,7 +26,7 @@ class ExchangeRateDetailViewModelTests: XCTestCase {
 
     func test_output_rateLabel() async {
         let predicateEntity = ExchangeRateEntity.RateEntity.mockValue
-        var (sut, cancellable) = makeSUT(param: ExchangeRateDetailCoordinator.Params(rateEntity: predicateEntity))
+        var (sut, cancellable) = makeSUT(param: ExchangeRateDetailCoordinator.Params(rateEntity: predicateEntity, view: .UIKit))
 
         let exp = expectation(description: "Wait for ExchangeRate Rate")
         sut.output.rateTextPublished
@@ -40,7 +40,7 @@ class ExchangeRateDetailViewModelTests: XCTestCase {
 
     func test_input_viewWillDisappear() {
         let predicateEntity = ExchangeRateEntity.RateEntity.mockValue
-        let (sut, _) = makeSUT(param: ExchangeRateDetailCoordinator.Params(rateEntity: predicateEntity))
+        let (sut, _) = makeSUT(param: ExchangeRateDetailCoordinator.Params(rateEntity: predicateEntity, view: .UIKit))
 
         let spy = SpyExchangeRateDetailViewModelDelegate()
         sut.delegate = spy

@@ -14,8 +14,10 @@ public protocol ExchangeRateDetailCoordinatorDelegate: AnyObject {
 public final class ExchangeRateDetailCoordinator: Coordinator {
     public struct Params {
         let rateEntity: ExchangeRateEntity.RateEntity
-        public init(rateEntity: ExchangeRateEntity.RateEntity) {
+        let view: PresentationView
+        public init(rateEntity: ExchangeRateEntity.RateEntity, view: PresentationView) {
             self.rateEntity = rateEntity
+            self.view = view
         }
     }
 
@@ -32,7 +34,13 @@ public final class ExchangeRateDetailCoordinator: Coordinator {
     }
 
     public func start() {
-        navigationController.pushViewController(makeExchangeRateDetailView(), animated: false)
+        let view = switch param.view {
+        case .UIKit:
+            makeExchangeRateDetailViewController()
+        case .SwiftUI:
+            makeExchangeRateDetailView()
+        }
+        navigationController.pushViewController(view, animated: false)
     }
 }
 

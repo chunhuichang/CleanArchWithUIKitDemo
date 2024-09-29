@@ -7,10 +7,10 @@
 
 import SwiftUI
 
-struct ExchangeRateDetailView: View {
-    @ObservedObject var viewModel: ExchangeRateDetailViewModel
+public struct ExchangeRateDetailView: View {
+    @ObservedObject public var viewModel: ExchangeRateDetailViewModel
 
-    var body: some View {
+    public var body: some View {
         VStack {
             Text(viewModel.currencyText)
                 .font(.system(size: 34.0))
@@ -28,5 +28,5 @@ struct ExchangeRateDetailView: View {
 }
 
 #Preview {
-    ExchangeRateDetailView(viewModel: ExchangeRateDetailViewModel(param: ExchangeRateDetailCoordinator.Params(rateEntity: ExchangeRateEntity.RateEntity.mockValue)))
+    ExchangeRateDetailView(viewModel: ExchangeRateDetailViewModel(param: ExchangeRateDetailCoordinator.Params(rateEntity: ExchangeRateEntity.RateEntity.mockValue, view: .SwiftUI)))
 }
