@@ -7,20 +7,27 @@
 
 import SwiftUI
 
-struct ExchangeRateListView: View {
+public struct ExchangeRateListView: View {
     @ObservedObject var viewModel: ExchangeRateListViewModel
 
-    var body: some View {
+    public var body: some View {
         List(viewModel.rateEntity?.rates ?? []) { item in
-            VStack(alignment: .leading, spacing: 3) {
-                Text(item.currencyText)
-                    .foregroundColor(.primary)
-                    .font(.headline)
-                HStack {
-                    Label(item.rateText, systemImage: "dollarsign.bank.building")
+            HStack {
+                VStack(alignment: .leading) {
+                    Text(item.currencyText)
+                        .foregroundColor(.primary)
+                        .font(.headline)
+                    HStack {
+                        Label(item.rateText, systemImage: "dollarsign.bank.building")
+                    }
+                    .foregroundColor(.secondary)
+                    .font(.subheadline)
                 }
-                .foregroundColor(.secondary)
-                .font(.subheadline)
+                Spacer()
+            }
+            .contentShape(Rectangle())
+            .onTapGesture {
+                viewModel.onTapGesture(item)
             }
         }
         .onAppear {

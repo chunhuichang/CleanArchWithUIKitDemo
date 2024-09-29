@@ -110,6 +110,14 @@ extension ExchangeRateListViewModel: ExchangeRateListVMInput {
         guard let rate = rateEntity?.rates[row] else {
             return
         }
+        goToDetail(rate)
+    }
+
+    public func onTapGesture(_ rate: ExchangeRateEntity.RateEntity) {
+        goToDetail(rate)
+    }
+
+    private func goToDetail(_ rate: ExchangeRateEntity.RateEntity) {
         delegate?.goToDetail(rate: rate)
     }
 }

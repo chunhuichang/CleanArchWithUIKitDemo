@@ -18,6 +18,6 @@ public final class AppDIContainer {
 extension AppDIContainer {
     func makeExchangeRateListDIContainer() -> ExchangeRateListDIContainer {
         let dependencies = ExchangeRateListDIContainer.Dependencies(loadDataLoader: loadDataLoader)
-        return ExchangeRateListDIContainer(dependencies: dependencies)
+        return ExchangeRateListDIContainer(dependencies: dependencies, view: .UIKit)
     }
 }
