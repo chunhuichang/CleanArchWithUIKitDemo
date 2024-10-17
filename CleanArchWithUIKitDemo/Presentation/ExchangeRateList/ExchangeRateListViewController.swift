@@ -14,6 +14,7 @@ public final class ExchangeRateListViewController: UIViewController {
     private var cancellables = Set<AnyCancellable>()
 
     public private(set) lazy var tableView: UITableView = createTableView()
+    public private(set) lazy var loadingActivity: UIActivityIndicatorView = createLoadingActivity()
 
     public init(viewModel: ExchangeRateListVMManager) {
         self.viewModel = viewModel
@@ -64,6 +65,11 @@ private extension ExchangeRateListViewController {
         self.view.backgroundColor = .white
         self.view.addSubview(self.tableView)
 
+        for item in [self.tableView, self.loadingActivity] {
+            self.view.addSubview(item)
+            item.translatesAutoresizingMaskIntoConstraints = false
+        }
+
         let s = self.view.safeAreaLayoutGuide
 
         NSLayoutConstraint.activate([
@@ -71,7 +77,22 @@ private extension ExchangeRateListViewController {
             self.tableView.leadingAnchor.constraint(equalTo: s.leadingAnchor, constant: 24.0),
             self.tableView.trailingAnchor.constraint(equalTo: s.trailingAnchor, constant: -24.0),
             self.tableView.bottomAnchor.constraint(equalTo: s.bottomAnchor, constant: -24.0),
+
+            self.loadingActivity.centerXAnchor.constraint(equalTo: s.centerXAnchor),
+            self.loadingActivity.centerYAnchor.constraint(equalTo: s.centerYAnchor),
+            self.loadingActivity.widthAnchor.constraint(equalTo: s.widthAnchor, multiplier: 0.2),
+            self.loadingActivity.heightAnchor.constraint(equalTo: self.loadingActivity.widthAnchor),
         ])
+    }
+
+    func createLoadingActivity() -> UIActivityIndicatorView {
+        let v = UIActivityIndicatorView()
+        v.hidesWhenStopped = true
+        v.style = .large
+        v.color = .white
+        v.backgroundColor = .darkGray
+        v.layer.cornerRadius = 10
+        return v
     }
 
     func createTableView() -> UITableView {
@@ -79,7 +100,6 @@ private extension ExchangeRateListViewController {
         v.register(UITableViewCell.self, forCellReuseIdentifier: "RateCell")
         v.delegate = self
         v.dataSource = self
-        v.translatesAutoresizingMaskIntoConstraints = false
         v.refreshControl = UIRefreshControl()
         v.refreshControl?.addTarget(self, action: #selector(self.refreshList), for: .valueChanged)
 
@@ -88,7 +108,7 @@ private extension ExchangeRateListViewController {
 
     @objc
     func refreshList() {
-        self.viewModel.input.viewDidLoad()
+        self.viewModel.input.triggerFetchData()
     }
 
     func showErrorAlert(title: String, message: String) {
@@ -118,11 +138,15 @@ private extension ExchangeRateListViewController {
 
         self.viewModel.output.isLoadingPublisher
             .receive(on: DispatchQueue.main)
-            .sink { [weak self] isLoading in
+            .sink { [weak self] isLoading, userInitiated in
                 guard let self else { return }
 
-                switch isLoading {
-                case false:
+                switch (isLoading, userInitiated) {
+                case (true, false):
+                    self.loadingActivity.startAnimating()
+                case (false, false):
+                    self.loadingActivity.stopAnimating()
+                case (false, true):
                     self.tableView.refreshControl?.endRefreshing()
                 default:
                     break

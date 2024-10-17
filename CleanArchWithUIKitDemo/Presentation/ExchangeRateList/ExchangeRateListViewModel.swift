@@ -11,13 +11,14 @@ import Foundation
 // Input
 public protocol ExchangeRateListVMInput {
     func viewDidLoad()
+    func triggerFetchData()
     func didSelectRowAt(_ row: Int)
 }
 
 // Output
 public protocol ExchangeRateListVMOutput {
     var rateEntityPublisher: Published<ExchangeRateEntity?>.Publisher { get }
-    var isLoadingPublisher: Published<Bool>.Publisher { get }
+    var isLoadingPublisher: Published<(isLoading: Bool, userInitiated: Bool)>.Publisher { get }
     var alertMessagePublisher: Published<(title: String, message: String)?>.Publisher { get }
 
     func numberOfRowsInSection(_ section: Int) -> Int
@@ -52,7 +53,7 @@ public final class ExchangeRateListViewModel: ObservableObject, ExchangeRateList
     }
 
     @Published private(set) var rateEntity: ExchangeRateEntity? = nil
-    @Published private(set) var isLoading: Bool = false
+    @Published private(set) var isLoading: (isLoading: Bool, userInitiated: Bool) = (false, false)
     @Published private(set) var alertMessage: (title: String, message: String)? = nil
 
     // Output
@@ -60,7 +61,7 @@ public final class ExchangeRateListViewModel: ObservableObject, ExchangeRateList
         $rateEntity
     }
 
-    public var isLoadingPublisher: Published<Bool>.Publisher {
+    public var isLoadingPublisher: Published<(isLoading: Bool, userInitiated: Bool)>.Publisher {
         $isLoading
     }
 
@@ -85,13 +86,21 @@ public extension ExchangeRateListViewModel {
 
 extension ExchangeRateListViewModel: ExchangeRateListVMInput {
     public func viewDidLoad() {
+        fetchData(userInitiated: false)
+    }
+
+    public func triggerFetchData() {
+        fetchData(userInitiated: true)
+    }
+
+    private func fetchData(userInitiated: Bool) {
         Task {
             await MainActor.run {
-                isLoading = true
+                isLoading = (true, userInitiated)
             }
             let result = await usecase.exchangeRateList(with: .USD)
             await MainActor.run {
-                isLoading = false
+                isLoading = (false, userInitiated)
             }
             switch result {
             case .success(let entity):
