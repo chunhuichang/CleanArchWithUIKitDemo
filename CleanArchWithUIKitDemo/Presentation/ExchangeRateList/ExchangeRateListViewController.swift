@@ -80,8 +80,15 @@ private extension ExchangeRateListViewController {
         v.delegate = self
         v.dataSource = self
         v.translatesAutoresizingMaskIntoConstraints = false
+        v.refreshControl = UIRefreshControl()
+        v.refreshControl?.addTarget(self, action: #selector(self.refreshList), for: .valueChanged)
 
         return v
+    }
+
+    @objc
+    func refreshList() {
+        self.viewModel.input.viewDidLoad()
     }
 
     func showErrorAlert(title: String, message: String) {
@@ -106,6 +113,20 @@ private extension ExchangeRateListViewController {
             .compactMap { $0 }
             .sink { [weak self] msg in
                 self?.showErrorAlert(title: msg.title, message: msg.message)
+            }
+            .store(in: &self.cancellables)
+
+        self.viewModel.output.isLoadingPublisher
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] isLoading in
+                guard let self else { return }
+
+                switch isLoading {
+                case false:
+                    self.tableView.refreshControl?.endRefreshing()
+                default:
+                    break
+                }
             }
             .store(in: &self.cancellables)
     }
