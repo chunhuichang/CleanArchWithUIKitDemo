@@ -11,13 +11,16 @@ import Foundation
 // Input
 public protocol ExchangeRateListVMInput {
     func viewDidLoad()
+    func triggerFetchData()
     func didSelectRowAt(_ row: Int)
 }
 
 // Output
 public protocol ExchangeRateListVMOutput {
     var rateEntityPublisher: Published<ExchangeRateEntity?>.Publisher { get }
-    var isLoadingPublisher: Published<Bool>.Publisher { get }
+    var isLoadingProgressPublisher: Published<Bool>.Publisher { get }
+    var isLoadingRefreshPublisher: Published<Bool>.Publisher { get }
+
     var alertMessagePublisher: Published<(title: String, message: String)?>.Publisher { get }
 
     func numberOfRowsInSection(_ section: Int) -> Int
@@ -52,7 +55,8 @@ public final class ExchangeRateListViewModel: ObservableObject, ExchangeRateList
     }
 
     @Published private(set) var rateEntity: ExchangeRateEntity? = nil
-    @Published private(set) var isLoading: Bool = false
+    @Published private(set) var isLoadingProgress: Bool = false
+    @Published private(set) var isLoadingRefresh: Bool = false
     @Published private(set) var alertMessage: (title: String, message: String)? = nil
 
     // Output
@@ -60,8 +64,12 @@ public final class ExchangeRateListViewModel: ObservableObject, ExchangeRateList
         $rateEntity
     }
 
-    public var isLoadingPublisher: Published<Bool>.Publisher {
-        $isLoading
+    public var isLoadingProgressPublisher: Published<Bool>.Publisher {
+        $isLoadingProgress
+    }
+
+    public var isLoadingRefreshPublisher: Published<Bool>.Publisher {
+        $isLoadingRefresh
     }
 
     public var alertMessagePublisher: Published<(title: String, message: String)?>.Publisher {
@@ -85,24 +93,46 @@ public extension ExchangeRateListViewModel {
 
 extension ExchangeRateListViewModel: ExchangeRateListVMInput {
     public func viewDidLoad() {
+        fetchData(userInitiated: false)
+    }
+
+    public func triggerFetchData() {
+        fetchData(userInitiated: true)
+    }
+
+    private func fetchData(userInitiated: Bool) {
         Task {
+            await fetchData(userInitiated: userInitiated)
+        }
+    }
+
+    public func fetchData(userInitiated: Bool = true) async {
+        await MainActor.run {
+            setLoadingState(isLoading: true, userInitiated: userInitiated)
+        }
+
+        let result = await usecase.exchangeRateList(with: .USD)
+        await MainActor.run {
+            setLoadingState(isLoading: false, userInitiated: userInitiated)
+        }
+        switch result {
+        case .success(let entity):
             await MainActor.run {
-                isLoading = true
+                self.rateEntity = entity
             }
-            let result = await usecase.exchangeRateList(with: .USD)
+        case .failure(let error):
             await MainActor.run {
-                isLoading = false
+                alertMessage = (title: "Error", message: error.localizedDescription)
             }
-            switch result {
-            case .success(let entity):
-                await MainActor.run {
-                    self.rateEntity = entity
-                }
-            case .failure(let error):
-                await MainActor.run {
-                    alertMessage = (title: "Error", message: error.localizedDescription)
-                }
-            }
+        }
+    }
+
+    private func setLoadingState(isLoading: Bool, userInitiated: Bool) {
+        switch (isLoading, userInitiated) {
+        case (_, false):
+            isLoadingProgress = isLoading
+        case (_, true):
+            isLoadingRefresh = isLoading
         }
     }
 
