@@ -102,22 +102,27 @@ extension ExchangeRateListViewModel: ExchangeRateListVMInput {
 
     private func fetchData(userInitiated: Bool) {
         Task {
+            await fetchData(userInitiated: userInitiated)
+        }
+    }
+
+    public func fetchData(userInitiated: Bool = true) async {
+        await MainActor.run {
+            setLoadingState(isLoading: true, userInitiated: userInitiated)
+        }
+
+        let result = await usecase.exchangeRateList(with: .USD)
+        await MainActor.run {
+            setLoadingState(isLoading: false, userInitiated: userInitiated)
+        }
+        switch result {
+        case .success(let entity):
             await MainActor.run {
-                setLoadingState(isLoading: true, userInitiated: userInitiated)
+                self.rateEntity = entity
             }
-            let result = await usecase.exchangeRateList(with: .USD)
+        case .failure(let error):
             await MainActor.run {
-                setLoadingState(isLoading: false, userInitiated: userInitiated)
-            }
-            switch result {
-            case .success(let entity):
-                await MainActor.run {
-                    self.rateEntity = entity
-                }
-            case .failure(let error):
-                await MainActor.run {
-                    alertMessage = (title: "Error", message: error.localizedDescription)
-                }
+                alertMessage = (title: "Error", message: error.localizedDescription)
             }
         }
     }

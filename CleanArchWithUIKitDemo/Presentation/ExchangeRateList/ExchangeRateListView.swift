@@ -33,6 +33,9 @@ public struct ExchangeRateListView: View {
         .onAppear {
             viewModel.input.viewDidLoad()
         }
+        .refreshable {
+            await viewModel.fetchData()
+        }
     }
 }
 
