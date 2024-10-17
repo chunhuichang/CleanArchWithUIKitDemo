@@ -136,20 +136,24 @@ private extension ExchangeRateListViewController {
             }
             .store(in: &self.cancellables)
 
-        self.viewModel.output.isLoadingPublisher
+        self.viewModel.output.isLoadingRefreshPublisher
             .receive(on: DispatchQueue.main)
-            .sink { [weak self] isLoading, userInitiated in
+            .sink { [weak self] isLoading in
+                if !isLoading {
+                    self?.tableView.refreshControl?.endRefreshing()
+                }
+            }
+            .store(in: &self.cancellables)
+
+        self.viewModel.output.isLoadingProgressPublisher
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] isLoading in
                 guard let self else { return }
 
-                switch (isLoading, userInitiated) {
-                case (true, false):
+                if isLoading {
                     self.loadingActivity.startAnimating()
-                case (false, false):
+                } else {
                     self.loadingActivity.stopAnimating()
-                case (false, true):
-                    self.tableView.refreshControl?.endRefreshing()
-                default:
-                    break
                 }
             }
             .store(in: &self.cancellables)

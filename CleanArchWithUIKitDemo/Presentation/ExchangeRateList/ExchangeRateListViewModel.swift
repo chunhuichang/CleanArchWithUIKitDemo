@@ -18,7 +18,9 @@ public protocol ExchangeRateListVMInput {
 // Output
 public protocol ExchangeRateListVMOutput {
     var rateEntityPublisher: Published<ExchangeRateEntity?>.Publisher { get }
-    var isLoadingPublisher: Published<(isLoading: Bool, userInitiated: Bool)>.Publisher { get }
+    var isLoadingProgressPublisher: Published<Bool>.Publisher { get }
+    var isLoadingRefreshPublisher: Published<Bool>.Publisher { get }
+
     var alertMessagePublisher: Published<(title: String, message: String)?>.Publisher { get }
 
     func numberOfRowsInSection(_ section: Int) -> Int
@@ -53,7 +55,8 @@ public final class ExchangeRateListViewModel: ObservableObject, ExchangeRateList
     }
 
     @Published private(set) var rateEntity: ExchangeRateEntity? = nil
-    @Published private(set) var isLoading: (isLoading: Bool, userInitiated: Bool) = (false, false)
+    @Published private(set) var isLoadingProgress: Bool = false
+    @Published private(set) var isLoadingRefresh: Bool = false
     @Published private(set) var alertMessage: (title: String, message: String)? = nil
 
     // Output
@@ -61,8 +64,12 @@ public final class ExchangeRateListViewModel: ObservableObject, ExchangeRateList
         $rateEntity
     }
 
-    public var isLoadingPublisher: Published<(isLoading: Bool, userInitiated: Bool)>.Publisher {
-        $isLoading
+    public var isLoadingProgressPublisher: Published<Bool>.Publisher {
+        $isLoadingProgress
+    }
+
+    public var isLoadingRefreshPublisher: Published<Bool>.Publisher {
+        $isLoadingRefresh
     }
 
     public var alertMessagePublisher: Published<(title: String, message: String)?>.Publisher {
@@ -96,11 +103,11 @@ extension ExchangeRateListViewModel: ExchangeRateListVMInput {
     private func fetchData(userInitiated: Bool) {
         Task {
             await MainActor.run {
-                isLoading = (true, userInitiated)
+                setLoadingState(isLoading: true, userInitiated: userInitiated)
             }
             let result = await usecase.exchangeRateList(with: .USD)
             await MainActor.run {
-                isLoading = (false, userInitiated)
+                setLoadingState(isLoading: false, userInitiated: userInitiated)
             }
             switch result {
             case .success(let entity):
@@ -112,6 +119,15 @@ extension ExchangeRateListViewModel: ExchangeRateListVMInput {
                     alertMessage = (title: "Error", message: error.localizedDescription)
                 }
             }
+        }
+    }
+
+    private func setLoadingState(isLoading: Bool, userInitiated: Bool) {
+        switch (isLoading, userInitiated) {
+        case (_, false):
+            isLoadingProgress = isLoading
+        case (_, true):
+            isLoadingRefresh = isLoading
         }
     }
 
