@@ -27,12 +27,14 @@
 		656B4DBBA5F6BB077901791E /* ExchangeRateListApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE7CDC4B8BF8AC08D7511B97 /* ExchangeRateListApi.swift */; };
 		6822B3AA5BC25E2318DE3EAE /* RemoteDataLoaderTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5107DA060E111FE55AC5CABB /* RemoteDataLoaderTest.swift */; };
 		6D3A1D74EB6A41C9C3D5A423 /* ExchangeRateListCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DE09DE9232382DFD108BF3F /* ExchangeRateListCoordinator.swift */; };
+		6E7D538F301D8B3E71555A33 /* LoadingOverlay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3806CF6FCB7BE385F2186845 /* LoadingOverlay.swift */; };
 		73B28D1A044D4555DBF2BF34 /* AppError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03A2CF8286DD900067CDF9C4 /* AppError.swift */; };
 		7F4ACF6FCF2264BF88E7FD15 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0AA2FC9BDA1C8F1197DE7D8 /* SceneDelegate.swift */; };
 		89FE5AD78CFF89CC9C86CC90 /* ExchangeRateListAPIEndToEndTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D167F7CFCB7817733D32132D /* ExchangeRateListAPIEndToEndTests.swift */; };
 		8B9157E4972623E7FAC41027 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 71CE5E7793D05666AF79BF79 /* LaunchScreen.storyboard */; };
 		8D49D28DA1F95DB97CE489FB /* RemoteDataLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3C588145448A58E401415F2 /* RemoteDataLoader.swift */; };
 		91FDD58E7AB3DF6745C447B8 /* ExchangeRateDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20D48D504DAABA67EA47D8D9 /* ExchangeRateDetailViewController.swift */; };
+		9B3326E56A2C331DD294E1E3 /* LoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1675E0CF5879CFF43C170D5 /* LoadingView.swift */; };
 		AA70A913EE2FC8ED1C8B1BB1 /* MockExchangeRateListUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 455111FAFD601F53160CBF01 /* MockExchangeRateListUseCase.swift */; };
 		AC79FDD62BFDC970E2135217 /* ExchangeRateListViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C62434F995BA7532B42286F8 /* ExchangeRateListViewControllerTests.swift */; };
 		B5290F3E38A34A3F93D355C0 /* ExchangeRateListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECADFA09F48B1D7A2FA9A9E9 /* ExchangeRateListViewModel.swift */; };
@@ -81,6 +83,7 @@
 		279806A4725B0215FA381A17 /* DummyDataServiceLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DummyDataServiceLoader.swift; sourceTree = "<group>"; };
 		2ADD1A1C1A8D8EBA7FAD5AF2 /* URLSessionHTTPClientTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLSessionHTTPClientTests.swift; sourceTree = "<group>"; };
 		2E830BAFEFC050496A59B788 /* ExchangeRateTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExchangeRateTests.swift; sourceTree = "<group>"; };
+		3806CF6FCB7BE385F2186845 /* LoadingOverlay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingOverlay.swift; sourceTree = "<group>"; };
 		3E3364867B6D0088F377985E /* ExchangeRateListUseCaseTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExchangeRateListUseCaseTests.swift; sourceTree = "<group>"; };
 		455111FAFD601F53160CBF01 /* MockExchangeRateListUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockExchangeRateListUseCase.swift; sourceTree = "<group>"; };
 		4DE09DE9232382DFD108BF3F /* ExchangeRateListCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExchangeRateListCoordinator.swift; sourceTree = "<group>"; };
@@ -123,6 +126,7 @@
 		ECA0B40846574AF0A14A5A10 /* XCTestCase+MemoryLeakTracking.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "XCTestCase+MemoryLeakTracking.swift"; sourceTree = "<group>"; };
 		ECADFA09F48B1D7A2FA9A9E9 /* ExchangeRateListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExchangeRateListViewModel.swift; sourceTree = "<group>"; };
 		EE7CDC4B8BF8AC08D7511B97 /* ExchangeRateListApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExchangeRateListApi.swift; sourceTree = "<group>"; };
+		F1675E0CF5879CFF43C170D5 /* LoadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingView.swift; sourceTree = "<group>"; };
 		F27252E4D8B4C41D0D5648B1 /* ExchangeRateListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExchangeRateListViewController.swift; sourceTree = "<group>"; };
 		F6870B656BF7907D53A59684 /* ExchangeRateDetailDIContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExchangeRateDetailDIContainer.swift; sourceTree = "<group>"; };
 		F72216DA2E124354586EF51E /* CleanArchWithUIKitDemo.app */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.application; path = CleanArchWithUIKitDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -392,6 +396,8 @@
 				844AF1204DF44C03380EC998 /* ExchangeRateListView.swift */,
 				F27252E4D8B4C41D0D5648B1 /* ExchangeRateListViewController.swift */,
 				ECADFA09F48B1D7A2FA9A9E9 /* ExchangeRateListViewModel.swift */,
+				3806CF6FCB7BE385F2186845 /* LoadingOverlay.swift */,
+				F1675E0CF5879CFF43C170D5 /* LoadingView.swift */,
 			);
 			path = ExchangeRateList;
 			sourceTree = "<group>";
@@ -619,6 +625,8 @@
 				EF484D4EB0D629811E230F1C /* ExchangeRateListViewController.swift in Sources */,
 				B5290F3E38A34A3F93D355C0 /* ExchangeRateListViewModel.swift in Sources */,
 				CF76714FE2DFDA29A6296040 /* HTTPClient.swift in Sources */,
+				6E7D538F301D8B3E71555A33 /* LoadingOverlay.swift in Sources */,
+				9B3326E56A2C331DD294E1E3 /* LoadingView.swift in Sources */,
 				CF0E5AED8B85A6F657A494EB /* MainExchangeRateListRepository.swift in Sources */,
 				E5DA4704E8E285E13FBB096E /* MockEntity.swift in Sources */,
 				2F76041DDD8C188616BF7F00 /* MockExchangeRateListRepository.swift in Sources */,

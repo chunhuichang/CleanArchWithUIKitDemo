@@ -14,7 +14,7 @@ public final class ExchangeRateListViewController: UIViewController {
     private var cancellables = Set<AnyCancellable>()
 
     public private(set) lazy var tableView: UITableView = createTableView()
-    public private(set) lazy var loadingActivity: UIActivityIndicatorView = createLoadingActivity()
+    private var loadingActivity: LoadingView?
 
     public init(viewModel: ExchangeRateListVMManager) {
         self.viewModel = viewModel
@@ -65,7 +65,7 @@ private extension ExchangeRateListViewController {
         self.view.backgroundColor = .white
         self.view.addSubview(self.tableView)
 
-        for item in [self.tableView, self.loadingActivity] {
+        for item in [self.tableView] {
             self.view.addSubview(item)
             item.translatesAutoresizingMaskIntoConstraints = false
         }
@@ -77,11 +77,6 @@ private extension ExchangeRateListViewController {
             self.tableView.leadingAnchor.constraint(equalTo: s.leadingAnchor, constant: 24.0),
             self.tableView.trailingAnchor.constraint(equalTo: s.trailingAnchor, constant: -24.0),
             self.tableView.bottomAnchor.constraint(equalTo: s.bottomAnchor, constant: -24.0),
-
-            self.loadingActivity.centerXAnchor.constraint(equalTo: s.centerXAnchor),
-            self.loadingActivity.centerYAnchor.constraint(equalTo: s.centerYAnchor),
-            self.loadingActivity.widthAnchor.constraint(equalTo: s.widthAnchor, multiplier: 0.2),
-            self.loadingActivity.heightAnchor.constraint(equalTo: self.loadingActivity.widthAnchor),
         ])
     }
 
@@ -116,6 +111,22 @@ private extension ExchangeRateListViewController {
         alert.addAction(UIAlertAction(title: "OK", style: .default))
         present(alert, animated: true)
     }
+
+    func showCustomLoadingView(with message: String? = nil, needIndicator: Bool = true) {
+        if self.loadingActivity == nil {
+            let loading = LoadingView(frame: view.bounds, needIndicator: needIndicator)
+            view.addSubview(loading)
+            if let message {
+                loading.setMessage(message)
+            }
+            self.loadingActivity = loading
+        }
+    }
+
+    func hideCustomLoadingView() {
+        self.loadingActivity?.stopAnimating()
+        self.loadingActivity = nil
+    }
 }
 
 // MARK: UI Binding
@@ -139,8 +150,11 @@ private extension ExchangeRateListViewController {
         self.viewModel.output.isLoadingRefreshPublisher
             .receive(on: DispatchQueue.main)
             .sink { [weak self] isLoading in
-                if !isLoading {
+                if isLoading {
+                    self?.showCustomLoadingView(needIndicator: false)
+                } else {
                     self?.tableView.refreshControl?.endRefreshing()
+                    self?.hideCustomLoadingView()
                 }
             }
             .store(in: &self.cancellables)
@@ -151,9 +165,9 @@ private extension ExchangeRateListViewController {
                 guard let self else { return }
 
                 if isLoading {
-                    self.loadingActivity.startAnimating()
+                    self.showCustomLoadingView()
                 } else {
-                    self.loadingActivity.stopAnimating()
+                    self.hideCustomLoadingView()
                 }
             }
             .store(in: &self.cancellables)
