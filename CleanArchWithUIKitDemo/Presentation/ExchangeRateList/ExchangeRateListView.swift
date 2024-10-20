@@ -37,13 +37,7 @@ public struct ExchangeRateListView: View {
             .refreshable {
                 await viewModel.fetchData()
             }
-
-            if viewModel.isLoadingProgress {
-                ProgressView {
-                    Text("Loading...")
-                }
-                .controlSize(.large)
-            }
+            .loadingOverlay(isLoadingRefresh: viewModel.isLoadingRefresh, isLoadingProgress: viewModel.isLoadingProgress)
         }
     }
 }
