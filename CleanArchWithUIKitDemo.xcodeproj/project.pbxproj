@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 54;
+	objectVersion = 56;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -46,6 +46,7 @@
 		CF893DAC2BC45494AE96CAEA /* ApiConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91CB000339FF729FA8902297 /* ApiConfig.swift */; };
 		D0C932190DEE7539C24965F9 /* ExchangeRateDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8E801C93653BBE40E71CDCF /* ExchangeRateDetailView.swift */; };
 		D2C307C5FCE587DDE8A010DE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DC4B9F6315A8B7267BFDF7CF /* Assets.xcassets */; };
+		E128C1372D7D7A6200A5E670 /* UIImage+Resize.swift in Sources */ = {isa = PBXBuildFile; fileRef = E128C1362D7D7A6200A5E670 /* UIImage+Resize.swift */; };
 		E5A08047553028F2FE83AF94 /* ExchangeRateListRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99D7A78B293EA0BDED992FDD /* ExchangeRateListRepository.swift */; };
 		E5DA4704E8E285E13FBB096E /* MockEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = D91CEDF4DF3D93B35F061669 /* MockEntity.swift */; };
 		E74AE78DF1CEF697DCF14378 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A74EB896AE2B6BEB9A905BFA /* AppDelegate.swift */; };
@@ -121,6 +122,7 @@
 		D91CEDF4DF3D93B35F061669 /* MockEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockEntity.swift; sourceTree = "<group>"; };
 		DC4B9F6315A8B7267BFDF7CF /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		DD05BC59B4CDE5723BA274E1 /* ExchangeRateDetailCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExchangeRateDetailCoordinator.swift; sourceTree = "<group>"; };
+		E128C1362D7D7A6200A5E670 /* UIImage+Resize.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+Resize.swift"; sourceTree = "<group>"; };
 		E142D1969B12EC63C98A99F3 /* ExchangeRateDetailViewControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExchangeRateDetailViewControllerTests.swift; sourceTree = "<group>"; };
 		E8E801C93653BBE40E71CDCF /* ExchangeRateDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExchangeRateDetailView.swift; sourceTree = "<group>"; };
 		ECA0B40846574AF0A14A5A10 /* XCTestCase+MemoryLeakTracking.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "XCTestCase+MemoryLeakTracking.swift"; sourceTree = "<group>"; };
@@ -435,9 +437,34 @@
 			path = UseCases;
 			sourceTree = "<group>";
 		};
+		E128C1332D7D78E500A5E670 /* Common */ = {
+			isa = PBXGroup;
+			children = (
+				E128C1342D7D78EB00A5E670 /* Extensions */,
+			);
+			path = Common;
+			sourceTree = "<group>";
+		};
+		E128C1342D7D78EB00A5E670 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				E128C1352D7D7A5700A5E670 /* UIKit */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		E128C1352D7D7A5700A5E670 /* UIKit */ = {
+			isa = PBXGroup;
+			children = (
+				E128C1362D7D7A6200A5E670 /* UIImage+Resize.swift */,
+			);
+			path = UIKit;
+			sourceTree = "<group>";
+		};
 		ED6A4143C0F5C6606630EB64 /* CleanArchWithUIKitDemo */ = {
 			isa = PBXGroup;
 			children = (
+				E128C1332D7D78E500A5E670 /* Common */,
 				9BFE48B0DA0B09B29C1E4CCB /* Application */,
 				2479116700E950704EDA5600 /* Data */,
 				48F31570022CBBAF95872DC8 /* Domain */,
@@ -533,8 +560,6 @@
 			attributes = {
 				BuildIndependentTargetsInParallel = YES;
 				LastUpgradeCheck = 1430;
-				TargetAttributes = {
-				};
 			};
 			buildConfigurationList = AFCE338EE842839776F528B7 /* Build configuration list for PBXProject "CleanArchWithUIKitDemo" */;
 			compatibilityVersion = "Xcode 14.0";
@@ -628,6 +653,7 @@
 				6E7D538F301D8B3E71555A33 /* LoadingOverlay.swift in Sources */,
 				9B3326E56A2C331DD294E1E3 /* LoadingView.swift in Sources */,
 				CF0E5AED8B85A6F657A494EB /* MainExchangeRateListRepository.swift in Sources */,
+				E128C1372D7D7A6200A5E670 /* UIImage+Resize.swift in Sources */,
 				E5DA4704E8E285E13FBB096E /* MockEntity.swift in Sources */,
 				2F76041DDD8C188616BF7F00 /* MockExchangeRateListRepository.swift in Sources */,
 				AA70A913EE2FC8ED1C8B1BB1 /* MockExchangeRateListUseCase.swift in Sources */,
